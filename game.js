@@ -1,10 +1,12 @@
+/*jslint browser: true*/
+/*global  $*/
 $(function() {
     "use strict";
     let nextArray = [];
     const INITIALIZE_VARIABLES = Array(13).fill(0);
     let [row, column, sum, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft, tr, position] = INITIALIZE_VARIABLES;
     // make an array of arrays that will (correspond to the grid that the user sees)
-    // and fill them with zeroes  
+    // and fill them with zeroes
     function arrayGrid(ROW, COLUMN) {
         let arr = [];
         let i = 0;
@@ -52,7 +54,7 @@ $(function() {
         }
     }
     makeGrid(20, 20);
-    // use split method to grap the class of the clicked cell - which contains the row and column number separated by "-". 
+    // use split method to grap the class of the clicked cell - which contains the row and column number separated by "-".
     const UPDATEARRAY = (function() {
         let position2;
         let splitPosition;
@@ -116,49 +118,48 @@ $(function() {
     }
     //life or death?
     function lifeOrDeath() {
-        // nextArray will be the next state of arr as determined by the rules   
+        // nextArray will be the next state of arr as determined by the rules
         nextArray = copyArray(arr);
         let i;
         for (i = 0; i <= 19; i += 1) {
             let j;
             for (j = 0; j <= 19; j += 1) {
                 //determine the surroundings of the cell (the arr Array). 0 is dead. 1 is alive.
-                // if a cell is at the edge, check the opposite side              
-                top = i === 0 ? arr[19][j] : arr[i - 1][j];
-
+                // if a cell is at the edge, check the opposite side
+                top = (i === 0) ? arr[19][j] : arr[i - 1][j];
                 topRight =
-                    i === 0 && j === 19 ?
+                    (i === 0 && j === 19) ?
                     arr[19][0] :
-                    i === 0 && j !== 19 ?
+                    (i === 0 && j !== 19) ?
                     arr[19][j + 1] :
-                    i !== 0 && j === 19 ? arr[i - 1][0] : arr[i - 1][j + 1];
+                    (i !== 0 && j === 19) ? arr[i - 1][0] : arr[i - 1][j + 1];
 
-                right = j === 19 ? arr[i][0] : arr[i][j + 1];
+                right = (j === 19) ? arr[i][0] : arr[i][j + 1];
 
                 bottomRight =
-                    i === 19 && j === 19 ?
+                    (i === 19 && j === 19) ?
                     arr[0][0] :
-                    i !== 19 && j === 19 ?
+                    (i !== 19 && j === 19) ?
                     arr[i + 1][0] :
-                    i === 19 && j !== 19 ? arr[0][j + 1] : arr[i + 1][j + 1];
+                    (i === 19 && j !== 19) ? arr[0][j + 1] : arr[i + 1][j + 1];
 
-                bottom = i === 19 ? arr[0][j] : arr[i + 1][j];
+                bottom = (i === 19) ? arr[0][j] : arr[i + 1][j];
 
                 bottomLeft =
-                    i === 19 && j === 0 ?
+                    (i === 19 && j === 0) ?
                     arr[0][19] :
-                    i !== 19 && j === 0 ?
+                    (i !== 19 && j === 0) ?
                     arr[i + 1][19] :
-                    i === 19 && j !== 0 ? arr[0][j - 1] : arr[i + 1][j - 1];
+                    (i === 19 && j !== 0) ? arr[0][j - 1] : arr[i + 1][j - 1];
 
-                left = j === 0 ? arr[i][19] : arr[i][j - 1];
+                left = (j === 0) ? arr[i][19] : arr[i][j - 1];
 
                 topLeft =
-                    i === 0 && j === 0 ?
+                    (i === 0 && j === 0) ?
                     arr[19][19] :
-                    i !== 0 && j === 0 ?
+                    (i !== 0 && j === 0) ?
                     arr[i - 1][19] :
-                    i === 0 && j !== 0 ? arr[19][j - 1] : arr[i - 1][j - 1];
+                    (i === 0 && j !== 0) ? arr[19][j - 1] : arr[i - 1][j - 1];
                 sum =
                     top +
                     topRight +
