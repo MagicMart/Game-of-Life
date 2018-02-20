@@ -50,7 +50,7 @@ td {
   color: rgb(220, 0, 0);
 }
 
-input[type="submit"] {
+#begin {
   min-width: 48px;
   min-height: 48px;
   background-color: red;
