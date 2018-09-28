@@ -16,7 +16,6 @@ $(function() {
     bottomLeft,
     left,
     topLeft,
-    tr,
     position,
   ] = INITIALIZE_VARIABLES;
   // make an array of arrays that will
@@ -63,21 +62,22 @@ $(function() {
     PIXELCANVAS.children().remove();
     // build grid
     let i2;
+    let str = '';
     for (i2 = 0; i2 < ROW; i2 += 1) {
-      PIXELCANVAS.append('<tr></tr>');
+      str += '<tr>';
       let i;
-      tr = $('tr');
       for (i = 0; i < COLUMN; i += 1) {
-        // const tr = $("tr");
         // use the arr array to determine
         // what cells are red. 1 is red(alive). 0 is dead.
         if (arr[i2][i] === 1) {
-          tr.last().append(`<td class="cell-${i2}-${i}- coloured">1</td>`);
+          str += `<td class="cell-${i2}-${i}- coloured">1</td>`;
         } else {
-          tr.last().append(`<td class="cell-${i2}-${i}- uncoloured">0</td>`);
+          str += `<td class="cell-${i2}-${i}- uncoloured">0</td>`;
         }
       }
+      str += '</tr>';
     }
+    PIXELCANVAS.append(str);
   }
   makeGrid(20, 20);
   // use split method to grap the class of the clicked cell -
