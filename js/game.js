@@ -11,11 +11,17 @@ $(function() {
      * @return {array}
      */
     function arrayGrid(rowWidth, columnHeight) {
-        let arr = [];
+        const arr = [];
         let i = 0;
+        let j = 0;
         while (i < rowWidth) {
-            arr[i] = Array(columnHeight).fill(0);
+            arr[i] = [];
+            while (j < columnHeight) {
+                arr[i][j] = 0;
+                j += 1;
+            }
             i += 1;
+            j = 0;
         }
         return arr;
     }
