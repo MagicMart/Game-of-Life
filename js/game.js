@@ -214,11 +214,9 @@ $(function() {
         // apply the rules of the Conway's game of life.
         // https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
-        if (sum === 2) {
-          continue;
-        } else if (sum === 3) {
+        if (sum === 3) {
           nextArray[i][j] = 1;
-        } else {
+        } else if (sum !== 2) {
           nextArray[i][j] = 0;
         }
       }
