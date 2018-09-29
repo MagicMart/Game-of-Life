@@ -3,21 +3,9 @@
 $(function() {
   'use strict';
   let nextArray = [];
-  const INITIALIZE_VARIABLES = Array(13).fill(0);
-  let [
-    row,
-    column,
-    sum,
-    top,
-    topRight,
-    right,
-    bottomRight,
-    bottom,
-    bottomLeft,
-    left,
-    topLeft,
-    position,
-  ] = INITIALIZE_VARIABLES;
+  let row;
+  let column;
+  let position;
   // make an array of arrays that will
   // (correspond to the grid that the user sees)
   // and fill them with zeroes
@@ -160,8 +148,8 @@ $(function() {
         // determine the surroundings of the cell (the arr Array).
         // 0 is dead. 1 is alive.
         // if a cell is at the edge, check the opposite side
-        top = i === 0 ? arr[19][j] : arr[i - 1][j];
-        topRight =
+        const top = i === 0 ? arr[19][j] : arr[i - 1][j];
+        const topRight =
           i === 0 && j === 19
             ? arr[19][0]
             : i === 0 && j !== 19
@@ -170,9 +158,9 @@ $(function() {
                 ? arr[i - 1][0]
                 : arr[i - 1][j + 1];
 
-        right = j === 19 ? arr[i][0] : arr[i][j + 1];
+        const right = j === 19 ? arr[i][0] : arr[i][j + 1];
 
-        bottomRight =
+        const bottomRight =
           i === 19 && j === 19
             ? arr[0][0]
             : i !== 19 && j === 19
@@ -181,9 +169,9 @@ $(function() {
                 ? arr[0][j + 1]
                 : arr[i + 1][j + 1];
 
-        bottom = i === 19 ? arr[0][j] : arr[i + 1][j];
+        const bottom = i === 19 ? arr[0][j] : arr[i + 1][j];
 
-        bottomLeft =
+        const bottomLeft =
           i === 19 && j === 0
             ? arr[0][19]
             : i !== 19 && j === 0
@@ -192,9 +180,9 @@ $(function() {
                 ? arr[0][j - 1]
                 : arr[i + 1][j - 1];
 
-        left = j === 0 ? arr[i][19] : arr[i][j - 1];
+        const left = j === 0 ? arr[i][19] : arr[i][j - 1];
 
-        topLeft =
+        const topLeft =
           i === 0 && j === 0
             ? arr[19][19]
             : i !== 0 && j === 0
@@ -202,7 +190,7 @@ $(function() {
               : i === 0 && j !== 0
                 ? arr[19][j - 1]
                 : arr[i - 1][j - 1];
-        sum =
+        const sum =
           top +
           topRight +
           right +
