@@ -116,16 +116,13 @@ $(function() {
   });
   // make a copy of an array that has arrays inside it
   /**
-   * @param  {array} array
+   * @param  {array} arrayToCopy
    * @return {array}
    */
-  function copyArray(array) {
-    const copy = [];
-    const arrayLength = array.length;
-    let i;
-    for (i = 0; i < arrayLength; i += 1) {
-      copy[i] = array[i].slice();
-    }
+  function copyArray(arrayToCopy) {
+    const copy = arrayToCopy.map((elem) => {
+      return elem.slice();
+    });
     return copy;
   }
   // life or death?
