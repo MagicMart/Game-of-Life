@@ -3,22 +3,19 @@
 $(function() {
   'use strict';
   let nextArray = [];
-  let row;
-  let column;
-  let position;
   // make an array of arrays that will
   // (correspond to the grid that the user sees)
   // and fill them with zeroes
   /**
-   * @param {number} ROW
-   * @param {number} COLUMN
+   * @param {number} rowWidth
+   * @param {number} columnHeight
    * @return {array}
    */
-  function arrayGrid(ROW, COLUMN) {
+  function arrayGrid(rowWidth, columnHeight) {
     let arr = [];
     let i = 0;
-    while (i < ROW) {
-      arr[i] = Array(COLUMN).fill(0);
+    while (i < rowWidth) {
+      arr[i] = Array(columnHeight).fill(0);
       i += 1;
     }
     return arr;
@@ -41,20 +38,20 @@ $(function() {
   });
   // makeGrid function then call it
   /**
-   * @param  {number} ROW
-   * @param  {number} COLUMN
+   * @param  {number} rowWidth
+   * @param  {number} columnHeight
    * @return {undefined}
    */
-  function makeGrid(ROW, COLUMN) {
+  function makeGrid(rowWidth, columnHeight) {
     // remove old grid (if any)
     PIXELCANVAS.children().remove();
     // build grid
     let i2;
     let str = '';
-    for (i2 = 0; i2 < ROW; i2 += 1) {
+    for (i2 = 0; i2 < rowWidth; i2 += 1) {
       str += '<tr>';
       let i;
-      for (i = 0; i < COLUMN; i += 1) {
+      for (i = 0; i < columnHeight; i += 1) {
         // use the arr array to determine
         // what cells are red. 1 is red(alive). 0 is dead.
         if (arr[i2][i] === 1) {
@@ -69,17 +66,13 @@ $(function() {
   }
   makeGrid(20, 20);
   // use split method to grap the class of the clicked cell -
-  // which contains the row and column number separated by "-".
-  const updateArray = (function() {
-    let position2;
-    let splitPosition;
-    return function(e) {
-      position2 = $(e.target).attr('class');
-      splitPosition = position2.split('-');
+  // which contains the rowWidth and columnHeight number separated by "-".
+  const updateArray = function(e) {
+    const position2 = $(e.target).attr('class');
+    const splitPosition = position2.split('-');
+    return splitPosition;
+  };
 
-      return splitPosition;
-    };
-  })();
   // paint when a cell is clicked
   PIXELCANVAS.on('click', 'td', function(e) {
     const CURRENT_COLOR = $(e.target).css('background-color');
@@ -91,20 +84,20 @@ $(function() {
           .css('background-color', 'rgb(220, 0, 0)')
           .css('color', 'rgb(220, 0, 0)')
           .text('1');
-      position = updateArray(e);
-      row = position[1];
-      column = position[2];
-      arr[row][column] = 1;
+      const position = updateArray(e);
+      const rowWidth = position[1];
+      const columnHeight = position[2];
+      arr[rowWidth][columnHeight] = 1;
       // makeGrid(20,20);
     } else {
       $(e.target)
           .css('background-color', 'rgba(0, 0, 0, 0)')
           .css('color', 'rgba(0, 0, 0, 0)')
           .text('0');
-      position = updateArray(e);
-      row = position[1];
-      column = position[2];
-      arr[row][column] = 0;
+      const position = updateArray(e);
+      const rowWidth = position[1];
+      const columnHeight = position[2];
+      arr[rowWidth][columnHeight] = 0;
       // makeGrid(20,20);
     }
   });
@@ -115,10 +108,10 @@ $(function() {
           .css('background-color', 'rgb(220, 0, 0)')
           .css('color', 'rgb(220, 0, 0)')
           .text('1');
-      position = updateArray(e);
-      row = position[1];
-      column = position[2];
-      arr[row][column] = 1;
+      const position = updateArray(e);
+      const rowWidth = position[1];
+      const columnHeight = position[2];
+      arr[rowWidth][columnHeight] = 1;
     }
   });
   // make a copy of an array that has arrays inside it
