@@ -28,10 +28,7 @@ $(function() {
     let arr = arrayGrid(20, 20);
     // the grid table
     const PIXELCANVAS = $("#pixel_canvas");
-    const beginClick = $("#begin");
-    beginClick.on("click", function() {
-        lifeOrDeath();
-    });
+
     // determine wether mouse is down or not
     let mouseDown = false;
     PIXELCANVAS.on("mousedown", function() {
@@ -207,4 +204,38 @@ $(function() {
         arr = copyArray(nextArray);
         makeGrid(20, 20);
     }
+    let tick;
+    /**
+     * @param  {boolean} start
+     */
+    function ticker(start) {
+        if (start) {
+            tick = setInterval(function() {
+                lifeOrDeath();
+            }, 500);
+        } else {
+            clearInterval(tick);
+        }
+    }
+
+    const beginClick = $("#begin");
+    beginClick.on(
+        "click",
+        (function() {
+            let start = false;
+            return function() {
+                start = start ? false : true;
+                if (start) {
+                    $("#begin")
+                        .css("background-color", "green")
+                        .val("Stop");
+                } else {
+                    $("#begin")
+                        .css("background-color", "red")
+                        .val("Start");
+                }
+                ticker(start);
+            };
+        })()
+    );
 });
