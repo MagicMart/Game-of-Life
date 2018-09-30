@@ -123,7 +123,7 @@ $(function() {
      */
     function copyArray(arrayToCopy) {
         const copy = arrayToCopy.map((elem) => {
-            return elem.slice();
+            return [...elem];
         });
         return copy;
     }
@@ -227,11 +227,11 @@ $(function() {
                 start = start ? false : true;
                 if (start) {
                     $("#begin")
-                        .css("background-color", "green")
+                        .css("background-color", "red")
                         .val("Stop");
                 } else {
                     $("#begin")
-                        .css("background-color", "red")
+                        .css("background-color", "green")
                         .val("Start");
                 }
                 ticker(start);
