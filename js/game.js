@@ -79,11 +79,12 @@ $(function() {
     // position[1] is row. position[2] is column
     /**
      * @param {array} position
+     * @param {number} alive
      */
-    function updateArray(position) {
+    function updateArray(position, alive = 1) {
         const rowWidth = position[1];
         const columnHeight = position[2];
-        arr[rowWidth][columnHeight] = 1;
+        arr[rowWidth][columnHeight] = alive;
     }
 
     // paint when a cell is clicked
@@ -103,7 +104,7 @@ $(function() {
                 .css("background-color", "rgba(0, 0, 0, 0)")
                 .css("color", "rgba(0, 0, 0, 0)")
                 .text("0");
-            updateArray(splitClassList(e));
+            updateArray(splitClassList(e), 0);
         }
     });
     // paint when mouse held down
