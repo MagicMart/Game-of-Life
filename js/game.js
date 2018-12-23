@@ -127,6 +127,25 @@ $(function() {
         });
         return copy;
     }
+
+    // check to see if the value is outside the matrix
+    // and change it if it is
+    /**
+     *
+     * @param {number} num
+     * @return {number}
+     */
+    function checkEdge(num) {
+        "use strict";
+        let edge = num;
+        if (num < 0) {
+            edge = 19;
+        }
+        if (num > 19) {
+            edge = 0;
+        }
+        return edge;
+    }
     // life or death?
     /**
      */
@@ -140,48 +159,20 @@ $(function() {
                 // determine the surroundings of the cell (the arr Array).
                 // 0 is dead. 1 is alive.
                 // if a cell is at the edge, check the opposite side
-                const top = i === 0 ? arr[19][j] : arr[i - 1][j];
-                const topRight =
-                    i === 0 && j === 19
-                        ? arr[19][0]
-                        : i === 0 && j !== 19
-                            ? arr[19][j + 1]
-                            : i !== 0 && j === 19
-                                ? arr[i - 1][0]
-                                : arr[i - 1][j + 1];
+                const top = arr[checkEdge(i - 1)][j];
+                const topRight = arr[checkEdge(i - 1)][checkEdge(j + 1)];
 
-                const right = j === 19 ? arr[i][0] : arr[i][j + 1];
+                const right = arr[i][checkEdge(j + 1)];
 
-                const bottomRight =
-                    i === 19 && j === 19
-                        ? arr[0][0]
-                        : i !== 19 && j === 19
-                            ? arr[i + 1][0]
-                            : i === 19 && j !== 19
-                                ? arr[0][j + 1]
-                                : arr[i + 1][j + 1];
+                const bottomRight = arr[checkEdge(i + 1)][checkEdge(j + 1)];
 
-                const bottom = i === 19 ? arr[0][j] : arr[i + 1][j];
+                const bottom = arr[checkEdge(i + 1)][j];
 
-                const bottomLeft =
-                    i === 19 && j === 0
-                        ? arr[0][19]
-                        : i !== 19 && j === 0
-                            ? arr[i + 1][19]
-                            : i === 19 && j !== 0
-                                ? arr[0][j - 1]
-                                : arr[i + 1][j - 1];
+                const bottomLeft = arr[checkEdge(i + 1)][checkEdge(j - 1)];
 
-                const left = j === 0 ? arr[i][19] : arr[i][j - 1];
+                const left = arr[i][checkEdge(j - 1)];
 
-                const topLeft =
-                    i === 0 && j === 0
-                        ? arr[19][19]
-                        : i !== 0 && j === 0
-                            ? arr[i - 1][19]
-                            : i === 0 && j !== 0
-                                ? arr[19][j - 1]
-                                : arr[i - 1][j - 1];
+                const topLeft = arr[checkEdge(i - 1)][checkEdge(j - 1)];
                 const sum =
                     top +
                     topRight +
