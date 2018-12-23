@@ -58,9 +58,9 @@ $(function() {
                 // use the dataMatrix array to determine
                 // what cells are red. 1 is red(alive). 0 is dead.
                 if (dataMatrix[i2][i] === 1) {
-                    str += `<td class="cell-${i2}-${i}- coloured">1</td>`;
+                    str += `<td class="cell-${i2}-${i}- coloured"></td>`;
                 } else {
-                    str += `<td class="cell-${i2}-${i}- uncoloured">0</td>`;
+                    str += `<td class="cell-${i2}-${i}- uncoloured"></td>`;
                 }
             }
             str += "</tr>";
@@ -96,26 +96,17 @@ $(function() {
         // current cell will change color
 
         if (CURRENT_COLOR === "rgba(0, 0, 0, 0)") {
-            $(e.target)
-                .css("background-color", "rgb(220, 0, 0)")
-                .css("color", "rgb(220, 0, 0)")
-                .text("1");
+            $(e.target).css("background-color", "rgb(220, 0, 0)");
             updateMatrix(cellCoord(e.target));
         } else {
-            $(e.target)
-                .css("background-color", "rgba(0, 0, 0, 0)")
-                .css("color", "rgba(0, 0, 0, 0)")
-                .text("0");
+            $(e.target).css("background-color", "rgba(0, 0, 0, 0)");
             updateMatrix(cellCoord(e.target), 0);
         }
     });
     // paint when mouse held down
     PIXELCANVAS.on("mouseenter", "td", function(e) {
         if (mouseDown) {
-            $(e.target)
-                .css("background-color", "rgb(220, 0, 0)")
-                .css("color", "rgb(220, 0, 0)")
-                .text("1");
+            $(e.target).css("background-color", "rgb(220, 0, 0)");
             updateMatrix(cellCoord(e.target));
         }
     });
