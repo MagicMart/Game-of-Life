@@ -69,11 +69,22 @@ $(function() {
     makeGrid(20, 20);
     // use split method to grap the class of the clicked cell -
     // which contains the rowWidth and columnHeight number separated by "-".
-    const updateArray = function(e) {
+    const splitClassList = function(e) {
         const position2 = $(e.target).attr("class");
         const splitPosition = position2.split("-");
         return splitPosition;
     };
+
+    // position is a classList split at "-"
+    // position[1] is row. position[2] is column
+    /**
+     * @param {array} position
+     */
+    function updateArray(position) {
+        const rowWidth = position[1];
+        const columnHeight = position[2];
+        arr[rowWidth][columnHeight] = 1;
+    }
 
     // paint when a cell is clicked
     PIXELCANVAS.on("click", "td", function(e) {
@@ -86,21 +97,13 @@ $(function() {
                 .css("background-color", "rgb(220, 0, 0)")
                 .css("color", "rgb(220, 0, 0)")
                 .text("1");
-            const position = updateArray(e);
-            const rowWidth = position[1];
-            const columnHeight = position[2];
-            arr[rowWidth][columnHeight] = 1;
-            // makeGrid(20,20);
+            updateArray(splitClassList(e));
         } else {
             $(e.target)
                 .css("background-color", "rgba(0, 0, 0, 0)")
                 .css("color", "rgba(0, 0, 0, 0)")
                 .text("0");
-            const position = updateArray(e);
-            const rowWidth = position[1];
-            const columnHeight = position[2];
-            arr[rowWidth][columnHeight] = 0;
-            // makeGrid(20,20);
+            updateArray(splitClassList(e));
         }
     });
     // paint when mouse held down
@@ -110,10 +113,7 @@ $(function() {
                 .css("background-color", "rgb(220, 0, 0)")
                 .css("color", "rgb(220, 0, 0)")
                 .text("1");
-            const position = updateArray(e);
-            const rowWidth = position[1];
-            const columnHeight = position[2];
-            arr[rowWidth][columnHeight] = 1;
+            updateArray(splitClassList(e));
         }
     });
     // make a copy of an array that has arrays inside it
@@ -171,6 +171,7 @@ $(function() {
                 const left = arr[i][checkEdge(j - 1)];
 
                 const topLeft = arr[checkEdge(i - 1)][checkEdge(j - 1)];
+
                 const sum =
                     top +
                     topRight +
@@ -180,6 +181,7 @@ $(function() {
                     bottomLeft +
                     left +
                     topLeft;
+
                 // apply the rules of the Conway's game of life.
                 // https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
