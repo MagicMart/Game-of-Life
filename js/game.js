@@ -10,22 +10,22 @@ $(function() {
      * @param {number} columnHeight
      * @return {array}
      */
-    function arrayGrid(rowWidth, columnHeight) {
-        const arr = [];
+    function makeMatrix(rowWidth, columnHeight) {
+        const matrix = [];
         let i = 0;
         let j = 0;
         while (i < rowWidth) {
-            arr[i] = [];
+            matrix[i] = [];
             while (j < columnHeight) {
-                arr[i][j] = 0;
+                matrix[i][j] = 0;
                 j += 1;
             }
             i += 1;
             j = 0;
         }
-        return arr;
+        return matrix;
     }
-    let arr = arrayGrid(20, 20);
+    let dataMatrix = makeMatrix(20, 20);
     // the grid table
     const PIXELCANVAS = $("#pixel_canvas");
 
@@ -38,13 +38,14 @@ $(function() {
     $("body").on("mouseup", function() {
         mouseDown = false;
     });
-    // makeGrid function then call it
+    // displayGrid function then call it
     /**
      * @param  {number} rowWidth
      * @param  {number} columnHeight
      * @return {undefined}
      */
-    function makeGrid(rowWidth, columnHeight) {
+    function displayGrid(rowWidth, columnHeight) {
+        "use strict";
         // remove old grid (if any)
         PIXELCANVAS.children().remove();
         // build grid
@@ -54,9 +55,9 @@ $(function() {
             str += "<tr>";
             let i;
             for (i = 0; i < columnHeight; i += 1) {
-                // use the arr array to determine
+                // use the dataMatrix array to determine
                 // what cells are red. 1 is red(alive). 0 is dead.
-                if (arr[i2][i] === 1) {
+                if (dataMatrix[i2][i] === 1) {
                     str += `<td class="cell-${i2}-${i}- coloured">1</td>`;
                 } else {
                     str += `<td class="cell-${i2}-${i}- uncoloured">0</td>`;
@@ -66,10 +67,11 @@ $(function() {
         }
         PIXELCANVAS.append(str);
     }
-    makeGrid(20, 20);
+    displayGrid(20, 20);
     // use split method to grap the class of the clicked cell -
     // which contains the rowWidth and columnHeight number separated by "-".
     const splitClassList = function(e) {
+        "use strict";
         const position2 = $(e.target).attr("class");
         const splitPosition = position2.split("-");
         return splitPosition;
@@ -81,10 +83,10 @@ $(function() {
      * @param {array} position
      * @param {number} alive
      */
-    function updateArray(position, alive = 1) {
+    function updateMatrix(position, alive = 1) {
         const rowWidth = position[1];
         const columnHeight = position[2];
-        arr[rowWidth][columnHeight] = alive;
+        dataMatrix[rowWidth][columnHeight] = alive;
     }
 
     // paint when a cell is clicked
@@ -98,13 +100,13 @@ $(function() {
                 .css("background-color", "rgb(220, 0, 0)")
                 .css("color", "rgb(220, 0, 0)")
                 .text("1");
-            updateArray(splitClassList(e));
+            updateMatrix(splitClassList(e));
         } else {
             $(e.target)
                 .css("background-color", "rgba(0, 0, 0, 0)")
                 .css("color", "rgba(0, 0, 0, 0)")
                 .text("0");
-            updateArray(splitClassList(e), 0);
+            updateMatrix(splitClassList(e), 0);
         }
     });
     // paint when mouse held down
@@ -114,16 +116,17 @@ $(function() {
                 .css("background-color", "rgb(220, 0, 0)")
                 .css("color", "rgb(220, 0, 0)")
                 .text("1");
-            updateArray(splitClassList(e));
+            updateMatrix(splitClassList(e));
         }
     });
     // make a copy of an array that has arrays inside it
     /**
-     * @param  {array} arrayToCopy
+     * @param  {array} matrix
      * @return {array}
      */
-    function copyArray(arrayToCopy) {
-        const copy = arrayToCopy.map((elem) => {
+    function copyMatrix(matrix) {
+        "use strict";
+        const copy = matrix.map((elem) => {
             return [...elem];
         });
         return copy;
@@ -149,29 +152,34 @@ $(function() {
     /**
      */
     function lifeOrDeath() {
-        // nextArray will be the next state of arr as determined by the rules
-        let nextArray = copyArray(arr);
+        "use strict";
+        // nextArray will be the next state of dataMatrix
+        // as determined by the rules
+        let nextArray = copyMatrix(dataMatrix);
         let i;
         for (i = 0; i <= 19; i += 1) {
             let j;
             for (j = 0; j <= 19; j += 1) {
-                // determine the surroundings of the cell (the arr Array).
+                // determine the surroundings of the cell
+                // (the dataMatrix Array).
                 // 0 is dead. 1 is alive.
                 // if a cell is at the edge, check the opposite side
-                const top = arr[checkEdge(i - 1)][j];
-                const topRight = arr[checkEdge(i - 1)][checkEdge(j + 1)];
+                const top = dataMatrix[checkEdge(i - 1)][j];
+                const topRight = dataMatrix[checkEdge(i - 1)][checkEdge(j + 1)];
 
-                const right = arr[i][checkEdge(j + 1)];
+                const right = dataMatrix[i][checkEdge(j + 1)];
 
-                const bottomRight = arr[checkEdge(i + 1)][checkEdge(j + 1)];
+                const bottomRight =
+                    dataMatrix[checkEdge(i + 1)][checkEdge(j + 1)];
 
-                const bottom = arr[checkEdge(i + 1)][j];
+                const bottom = dataMatrix[checkEdge(i + 1)][j];
 
-                const bottomLeft = arr[checkEdge(i + 1)][checkEdge(j - 1)];
+                const bottomLeft =
+                    dataMatrix[checkEdge(i + 1)][checkEdge(j - 1)];
 
-                const left = arr[i][checkEdge(j - 1)];
+                const left = dataMatrix[i][checkEdge(j - 1)];
 
-                const topLeft = arr[checkEdge(i - 1)][checkEdge(j - 1)];
+                const topLeft = dataMatrix[checkEdge(i - 1)][checkEdge(j - 1)];
 
                 const sum =
                     top +
@@ -193,14 +201,15 @@ $(function() {
                 }
             }
         }
-        arr = copyArray(nextArray);
-        makeGrid(20, 20);
+        dataMatrix = copyMatrix(nextArray);
+        displayGrid(20, 20);
     }
     let tick;
     /**
      * @param  {boolean} start
      */
     function ticker(start) {
+        "use strict";
         if (start) {
             tick = setInterval(function() {
                 lifeOrDeath();
@@ -214,6 +223,7 @@ $(function() {
     beginClick.on(
         "click",
         (function() {
+            "use strict";
             let start = false;
             return function() {
                 start = start ? false : true;
