@@ -38,13 +38,13 @@ $(function() {
     $("body").on("mouseup", function() {
         mouseDown = false;
     });
-    // displayGrid function then call it
+    // displayMatrix function then call it
     /**
      * @param  {number} rowWidth
      * @param  {number} columnHeight
      * @return {undefined}
      */
-    function displayGrid(rowWidth, columnHeight) {
+    function displayMatrix(rowWidth, columnHeight) {
         "use strict";
         // remove old grid (if any)
         PIXELCANVAS.children().remove();
@@ -67,7 +67,7 @@ $(function() {
         }
         PIXELCANVAS.append(str);
     }
-    displayGrid(20, 20);
+    displayMatrix(20, 20);
     // use split method to grap the class of the clicked cell -
     // which contains the rowWidth and columnHeight number separated by "-".
     const splitClassList = function(e) {
@@ -202,7 +202,7 @@ $(function() {
             }
         }
         dataMatrix = copyMatrix(nextArray);
-        displayGrid(20, 20);
+        displayMatrix(20, 20);
     }
     let tick;
     /**
