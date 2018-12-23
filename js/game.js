@@ -70,22 +70,22 @@ $(function() {
     displayMatrix(20, 20);
     // use split method to grap the class of the clicked cell -
     // which contains the rowWidth and columnHeight number separated by "-".
-    const splitClassList = function(e) {
+    const cellCoord = function(cell) {
         "use strict";
-        const position2 = $(e.target).attr("class");
-        const splitPosition = position2.split("-");
-        return splitPosition;
+        const classText = $(cell).attr("class");
+        const arr = classText.split("-");
+        return [arr[1], arr[2]];
     };
 
     // position is a classList split at "-"
     // position[1] is row. position[2] is column
     /**
-     * @param {array} position
+     * @param {array} cellArray
      * @param {number} alive
      */
-    function updateMatrix(position, alive = 1) {
-        const rowWidth = position[1];
-        const columnHeight = position[2];
+    function updateMatrix(cellArray, alive = 1) {
+        const rowWidth = cellArray[0];
+        const columnHeight = cellArray[1];
         dataMatrix[rowWidth][columnHeight] = alive;
     }
 
@@ -100,13 +100,13 @@ $(function() {
                 .css("background-color", "rgb(220, 0, 0)")
                 .css("color", "rgb(220, 0, 0)")
                 .text("1");
-            updateMatrix(splitClassList(e));
+            updateMatrix(cellCoord(e.target));
         } else {
             $(e.target)
                 .css("background-color", "rgba(0, 0, 0, 0)")
                 .css("color", "rgba(0, 0, 0, 0)")
                 .text("0");
-            updateMatrix(splitClassList(e), 0);
+            updateMatrix(cellCoord(e.target), 0);
         }
     });
     // paint when mouse held down
@@ -116,7 +116,7 @@ $(function() {
                 .css("background-color", "rgb(220, 0, 0)")
                 .css("color", "rgb(220, 0, 0)")
                 .text("1");
-            updateMatrix(splitClassList(e));
+            updateMatrix(cellCoord(e.target));
         }
     });
     // make a copy of an array that has arrays inside it
