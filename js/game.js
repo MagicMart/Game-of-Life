@@ -137,14 +137,12 @@ $(function() {
      */
     function checkEdge(num) {
         "use strict";
-        let edge = num;
         if (num < 0) {
-            edge = 19;
+            num = 19;
+        } else if (num > 19) {
+            num = 0;
         }
-        if (num > 19) {
-            edge = 0;
-        }
-        return edge;
+        return num;
     }
     // life or death?
     /**
