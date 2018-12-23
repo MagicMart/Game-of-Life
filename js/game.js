@@ -129,7 +129,7 @@ $(function() {
     }
 
     // check to see if the value is outside the matrix
-    // and change it if it is
+    // If it is, it appears on the opposite side
     /**
      *
      * @param {number} num
