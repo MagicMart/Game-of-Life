@@ -10,7 +10,7 @@ p {
 
 h1 {
     font-family: Monoton, cursive;
-    font-size: 70px;
+    font-size: 35px;
     margin: 0.2em;
     color: rgb(255, 128, 128);
 }
@@ -35,11 +35,11 @@ table {
 }
 
 tr {
-    height: 20px;
+    height: 15px;
 }
 
 td {
-    width: 20px;
+    width: 15px;
 }
 
 .dead {
