@@ -56,3 +56,7 @@ td {
     background-color: green;
     color: white;
 }
+
+.coord {
+    display: none;
+}

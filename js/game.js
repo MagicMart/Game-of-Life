@@ -57,10 +57,15 @@ $(function() {
             for (i = 0; i < columnHeight; i += 1) {
                 // use the dataMatrix array to determine
                 // what cells are red. 1 is red(alive). 0 is dead.
+                let text = i2 + " " + i;
                 if (dataMatrix[i2][i] === 1) {
-                    str += `<td class="cell-${i2}-${i}- coloured"></td>`;
+                    str += `<td class="coloured">
+                    <span class="coord">${text}</span>
+                    </td>`;
                 } else {
-                    str += `<td class="cell-${i2}-${i}- uncoloured"></td>`;
+                    str += `<td class="uncoloured">
+                    <span class="coord">${text}</span>
+                    </td>`;
                 }
             }
             str += "</tr>";
@@ -72,9 +77,9 @@ $(function() {
     // which contains the rowWidth and columnHeight number separated by "-".
     const cellCoord = function(cell) {
         "use strict";
-        const classText = $(cell).attr("class");
-        const arr = classText.split("-");
-        return [arr[1], arr[2]];
+        const spanText = cell.querySelector(".coord").textContent;
+        const arr = spanText.split(" ");
+        return [arr[0], arr[1]];
     };
 
     // position is a classList split at "-"
