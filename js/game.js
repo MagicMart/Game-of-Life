@@ -59,11 +59,11 @@ $(function() {
                 // what cells are red. 1 is red(alive). 0 is dead.
                 let text = i2 + " " + i;
                 if (dataMatrix[i2][i] === 1) {
-                    str += `<td class="coloured">
+                    str += `<td class="alive">
                     <span class="coord">${text}</span>
                     </td>`;
                 } else {
-                    str += `<td class="uncoloured">
+                    str += `<td class="dead">
                     <span class="coord">${text}</span>
                     </td>`;
                 }
@@ -209,7 +209,7 @@ $(function() {
         if (start) {
             tick = setInterval(function() {
                 lifeOrDeath();
-            }, 500);
+            }, 300);
         } else {
             clearInterval(tick);
         }

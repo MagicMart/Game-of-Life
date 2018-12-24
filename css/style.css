@@ -42,10 +42,10 @@ td {
     width: 20px;
 }
 
-.uncoloured {
+.dead {
     background-color: rgba(0, 0, 0, 0);
 }
-.coloured {
+.alive {
     background-color: rgb(220, 0, 0);
     color: rgb(220, 0, 0);
 }
