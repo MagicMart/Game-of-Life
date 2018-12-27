@@ -149,9 +149,9 @@ $(function() {
             }
             return num;
         }
-        // nextArray will be the next state of dataMatrix
+        // nextMatrix will be the next state of dataMatrix
         // as determined by the rules
-        let nextArray = copyMatrix(dataMatrix);
+        let nextMatrix = copyMatrix(dataMatrix);
         let i;
         for (i = 0; i <= 19; i += 1) {
             let j;
@@ -191,13 +191,13 @@ $(function() {
                 // https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
                 if (sum === 3) {
-                    nextArray[i][j] = 1;
+                    nextMatrix[i][j] = 1;
                 } else if (sum !== 2) {
-                    nextArray[i][j] = 0;
+                    nextMatrix[i][j] = 0;
                 }
             }
         }
-        dataMatrix = copyMatrix(nextArray);
+        dataMatrix = copyMatrix(nextMatrix);
         displayMatrix(20, 20);
     }
     //let tick;
