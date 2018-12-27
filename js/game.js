@@ -59,9 +59,11 @@ $(function() {
         }
 
         pixelCanvas.on("click", "td", function(e) {
-            const alive = e.target.classList.contains("alive");
+            const currentColor = $(e.target).css("background-color");
+
             // current cell will change color
-            if (!alive) {
+
+            if (currentColor === "rgba(0, 0, 0, 0)") {
                 $(e.target).css("background-color", "rgb(220, 0, 0)");
                 updateMatrix(cellCoord(e.target));
             } else {
@@ -71,10 +73,17 @@ $(function() {
         });
         // paint when mouse held down
         pixelCanvas.on("mouseenter", "td", function(e) {
-            const alive = e.target.classList.contains("alive");
-            if (mouseDown && !alive) {
-                $(e.target).css("background-color", "rgb(220, 0, 0)");
-                updateMatrix(cellCoord(e.target));
+            if (mouseDown) {
+                const currentColor = $(e.target).css("background-color");
+                if (currentColor === "rgba(0, 0, 0, 0)") {
+                    $(e.target).css("background-color", "rgb(220, 0, 0)");
+                    updateMatrix(cellCoord(e.target));
+                }
+                // erase
+                // else {
+                //     $(e.target).css("background-color", "rgba(0, 0, 0, 0)");
+                //     updateMatrix(cellCoord(e.target), 0);
+                // }
             }
         });
         return pixelCanvas;
@@ -202,7 +211,7 @@ $(function() {
         dataMatrix = copyMatrix(nextMatrix);
         displayMatrix(20, 20);
     }
-    //let tick;
+
     const ticker = (function() {
         let intervalID;
         /**
