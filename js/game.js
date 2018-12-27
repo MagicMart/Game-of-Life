@@ -26,18 +26,62 @@ $(function() {
         return matrix;
     }
     let dataMatrix = makeMatrix(20);
+    let mouseDown = false;
     // the grid table
-    const PIXELCANVAS = $("#pixel_canvas");
+    const PIXELCANVAS = (function() {
+        const pixelCanvas = $("#pixel_canvas");
+        pixelCanvas.on("mousedown", function() {
+            mouseDown = true;
+            return false;
+        });
+        $("body").on("mouseup", function() {
+            mouseDown = false;
+        });
+
+        const cellCoord = function(cell) {
+            "use strict";
+            const coord = cell.querySelector(".coord");
+            const arr = coord.textContent.split(" ");
+            return arr;
+        };
+
+        // position is a classList split at "-"
+        // position[1] is row. position[2] is column
+        /**
+         * @param {array} cellArray
+         * @param {number} alive
+         */
+        function updateMatrix(cellArray, alive = 1) {
+            const rowWidth = cellArray[0];
+            const columnHeight = cellArray[1];
+            dataMatrix[rowWidth][columnHeight] = alive;
+        }
+
+        pixelCanvas.on("click", "td", function(e) {
+            const CURRENT_COLOR = $(e.target).css("background-color");
+
+            // current cell will change color
+
+            if (CURRENT_COLOR === "rgba(0, 0, 0, 0)") {
+                $(e.target).css("background-color", "rgb(220, 0, 0)");
+                updateMatrix(cellCoord(e.target));
+            } else {
+                $(e.target).css("background-color", "rgba(0, 0, 0, 0)");
+                updateMatrix(cellCoord(e.target), 0);
+            }
+        });
+        // paint when mouse held down
+        pixelCanvas.on("mouseenter", "td", function(e) {
+            if (mouseDown) {
+                $(e.target).css("background-color", "rgb(220, 0, 0)");
+                updateMatrix(cellCoord(e.target));
+            }
+        });
+        return pixelCanvas;
+    })();
 
     // determine wether mouse is down or not
-    let mouseDown = false;
-    PIXELCANVAS.on("mousedown", function() {
-        mouseDown = true;
-        return false;
-    });
-    $("body").on("mouseup", function() {
-        mouseDown = false;
-    });
+
     // displayMatrix function then call it
     /**
      * @param  {number} rowWidth
@@ -75,46 +119,6 @@ $(function() {
     displayMatrix(20, 20);
     // use split method to grap the class of the clicked cell -
     // which contains the rowWidth and columnHeight number separated by "-".
-    const cellCoord = function(cell) {
-        "use strict";
-        const coord = cell.querySelector(".coord");
-        const arr = coord.textContent.split(" ");
-        return arr;
-    };
-
-    // position is a classList split at "-"
-    // position[1] is row. position[2] is column
-    /**
-     * @param {array} cellArray
-     * @param {number} alive
-     */
-    function updateMatrix(cellArray, alive = 1) {
-        const rowWidth = cellArray[0];
-        const columnHeight = cellArray[1];
-        dataMatrix[rowWidth][columnHeight] = alive;
-    }
-
-    // paint when a cell is clicked
-    PIXELCANVAS.on("click", "td", function(e) {
-        const CURRENT_COLOR = $(e.target).css("background-color");
-
-        // current cell will change color
-
-        if (CURRENT_COLOR === "rgba(0, 0, 0, 0)") {
-            $(e.target).css("background-color", "rgb(220, 0, 0)");
-            updateMatrix(cellCoord(e.target));
-        } else {
-            $(e.target).css("background-color", "rgba(0, 0, 0, 0)");
-            updateMatrix(cellCoord(e.target), 0);
-        }
-    });
-    // paint when mouse held down
-    PIXELCANVAS.on("mouseenter", "td", function(e) {
-        if (mouseDown) {
-            $(e.target).css("background-color", "rgb(220, 0, 0)");
-            updateMatrix(cellCoord(e.target));
-        }
-    });
 
     // life or death?
     /**
