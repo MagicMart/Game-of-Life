@@ -77,9 +77,9 @@ $(function() {
     // which contains the rowWidth and columnHeight number separated by "-".
     const cellCoord = function(cell) {
         "use strict";
-        const spanText = cell.querySelector(".coord").textContent;
-        const arr = spanText.split(" ");
-        return [arr[0], arr[1]];
+        const coord = cell.querySelector(".coord");
+        const arr = coord.textContent.split(" ");
+        return arr;
     };
 
     // position is a classList split at "-"
