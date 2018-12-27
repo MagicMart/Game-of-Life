@@ -28,7 +28,7 @@ $(function() {
     let dataMatrix = makeMatrix(20);
     let mouseDown = false;
     // the grid table
-    const PIXELCANVAS = (function() {
+    const matrixNode = (function() {
         const pixelCanvas = $("#pixel_canvas");
         pixelCanvas.on("mousedown", function() {
             mouseDown = true;
@@ -91,7 +91,7 @@ $(function() {
     function displayMatrix(rowWidth, columnHeight) {
         "use strict";
         // remove old grid (if any)
-        PIXELCANVAS.children().remove();
+        matrixNode.children().remove();
         // build grid
         let i2;
         let str = "";
@@ -114,7 +114,7 @@ $(function() {
             }
             str += "</tr>";
         }
-        PIXELCANVAS.append(str);
+        matrixNode.append(str);
     }
     displayMatrix(20, 20);
     // use split method to grap the class of the clicked cell -
