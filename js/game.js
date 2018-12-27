@@ -26,8 +26,8 @@ $(function() {
         return matrix;
     }
     let dataMatrix = makeMatrix(20);
-    // let mouseDown = false;
-    // the grid table
+
+    // the matrix
     const matrixNode = (function() {
         const pixelCanvas = $("#pixel_canvas");
         let mouseDown;
@@ -80,9 +80,7 @@ $(function() {
         return pixelCanvas;
     })();
 
-    // determine wether mouse is down or not
-
-    // displayMatrix function then call it
+    // displayMatrix
     /**
      * @param  {number} rowWidth
      * @param  {number} columnHeight
