@@ -26,10 +26,11 @@ $(function() {
         return matrix;
     }
     let dataMatrix = makeMatrix(20);
-    let mouseDown = false;
+    // let mouseDown = false;
     // the grid table
     const matrixNode = (function() {
         const pixelCanvas = $("#pixel_canvas");
+        let mouseDown;
         pixelCanvas.on("mousedown", function() {
             mouseDown = true;
             return false;
@@ -58,11 +59,9 @@ $(function() {
         }
 
         pixelCanvas.on("click", "td", function(e) {
-            const CURRENT_COLOR = $(e.target).css("background-color");
-
+            const alive = e.target.classList.contains("alive");
             // current cell will change color
-
-            if (CURRENT_COLOR === "rgba(0, 0, 0, 0)") {
+            if (!alive) {
                 $(e.target).css("background-color", "rgb(220, 0, 0)");
                 updateMatrix(cellCoord(e.target));
             } else {
@@ -72,7 +71,8 @@ $(function() {
         });
         // paint when mouse held down
         pixelCanvas.on("mouseenter", "td", function(e) {
-            if (mouseDown) {
+            const alive = e.target.classList.contains("alive");
+            if (mouseDown && !alive) {
                 $(e.target).css("background-color", "rgb(220, 0, 0)");
                 updateMatrix(cellCoord(e.target));
             }
