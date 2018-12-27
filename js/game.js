@@ -10,13 +10,13 @@ $(function() {
      * @param {number} columnHeight
      * @return {array}
      */
-    function makeMatrix(rowWidth, columnHeight) {
+    function makeMatrix(size) {
         const matrix = [];
         let i = 0;
         let j = 0;
-        while (i < rowWidth) {
+        while (i < size) {
             matrix[i] = [];
-            while (j < columnHeight) {
+            while (j < size) {
                 matrix[i][j] = 0;
                 j += 1;
             }
@@ -25,7 +25,7 @@ $(function() {
         }
         return matrix;
     }
-    let dataMatrix = makeMatrix(20, 20);
+    let dataMatrix = makeMatrix(20);
     // the grid table
     const PIXELCANVAS = $("#pixel_canvas");
 
