@@ -122,7 +122,7 @@ $(function() {
      */
     function copyMatrix(matrix) {
         "use strict";
-        const copy = matrix.map((elem) => {
+        const copy = matrix.map(elem => {
             return [...elem];
         });
         return copy;
@@ -200,20 +200,23 @@ $(function() {
         dataMatrix = copyMatrix(nextArray);
         displayMatrix(20, 20);
     }
-    let tick;
-    /**
-     * @param  {boolean} start
-     */
-    function ticker(start) {
-        "use strict";
-        if (start) {
-            tick = setInterval(function() {
-                lifeOrDeath();
-            }, 300);
-        } else {
-            clearInterval(tick);
-        }
-    }
+    //let tick;
+    const ticker = (function() {
+        let intervalID;
+        /**
+         * @param  {boolean} start
+         */
+        return function ticker(start) {
+            "use strict";
+            if (start) {
+                intervalID = setInterval(function() {
+                    lifeOrDeath();
+                }, 300);
+            } else {
+                clearInterval(intervalID);
+            }
+        };
+    })();
 
     const beginClick = $("#begin");
     beginClick.on(
