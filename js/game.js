@@ -115,40 +115,40 @@ $(function() {
             updateMatrix(cellCoord(e.target));
         }
     });
-    // make a copy of an array that has arrays inside it
-    /**
-     * @param  {array} matrix
-     * @return {array}
-     */
-    function copyMatrix(matrix) {
-        "use strict";
-        const copy = matrix.map(elem => {
-            return [...elem];
-        });
-        return copy;
-    }
 
-    // check to see if the value is outside the matrix
-    // If it is, it appears on the opposite side
-    /**
-     *
-     * @param {number} num
-     * @return {number}
-     */
-    function checkEdge(num) {
-        "use strict";
-        if (num < 0) {
-            num = 19;
-        } else if (num > 19) {
-            num = 0;
-        }
-        return num;
-    }
     // life or death?
     /**
      */
     function lifeOrDeath() {
         "use strict";
+        // make a copy of an array that has arrays inside it
+        /**
+         * @param  {array} matrix
+         * @return {array}
+         */
+        function copyMatrix(matrix) {
+            "use strict";
+            const copy = matrix.map(elem => {
+                return [...elem];
+            });
+            return copy;
+        }
+        // check to see if the value is outside the matrix
+        // If it is, it appears on the opposite side
+        /**
+         *
+         * @param {number} num
+         * @return {number}
+         */
+        function checkEdge(num) {
+            "use strict";
+            if (num < 0) {
+                num = 19;
+            } else if (num > 19) {
+                num = 0;
+            }
+            return num;
+        }
         // nextArray will be the next state of dataMatrix
         // as determined by the rules
         let nextArray = copyMatrix(dataMatrix);
