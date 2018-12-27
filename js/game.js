@@ -59,13 +59,13 @@ $(function() {
                 // what cells are red. 1 is red(alive). 0 is dead.
                 let text = i2 + " " + i;
                 if (dataMatrix[i2][i] === 1) {
-                    str += `<td class="alive">
-                    <span class="coord">${text}</span>
-                    </td>`;
+                    str += "<td class=\"alive\">";
+                    str += "<span class=\"coord\">" + text + "</span>";
+                    str += "</td>";
                 } else {
-                    str += `<td class="dead">
-                    <span class="coord">${text}</span>
-                    </td>`;
+                    str += "<td class=\"dead\">";
+                    str += "<span class=\"coord\">" + text + "</span>";
+                    str += "</td>";
                 }
             }
             str += "</tr>";
