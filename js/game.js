@@ -121,12 +121,12 @@ $(function() {
         // remove old grid (if any)
         matrixNode.children().remove();
         // build grid
-        let i;
+        let i = 0;
+        let j = 0;
         let str = "";
-        for (i = 0; i < size; i += 1) {
+        while (i < size) {
             str += "<tr>";
-            let j;
-            for (j = 0; j < size; j += 1) {
+            while (j < size) {
                 // use the dataMatrix array to determine
                 // what cells are red. 1 is red(alive). 0 is dead.
                 let text = i + " " + j;
@@ -139,7 +139,10 @@ $(function() {
                     str += "<span class=\"coord\">" + text + "</span>";
                     str += "</td>";
                 }
+                j += 1;
             }
+            i += 1;
+            j = 0;
             str += "</tr>";
         }
         matrixNode.append(str);
