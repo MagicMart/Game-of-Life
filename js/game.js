@@ -27,6 +27,14 @@ $(function() {
     }
     let dataMatrix = makeMatrix(20);
 
+    function copyMatrix(matrix) {
+        "use strict";
+        const copy = matrix.map(elem => {
+            return [...elem];
+        });
+        return copy;
+    }
+
     // the matrix
     const matrixNode = (function() {
         const pixelCanvas = $("#pixel_canvas");
@@ -53,9 +61,11 @@ $(function() {
          * @param {number} alive
          */
         function updateMatrix(cellArray, alive = 1) {
-            const rowWidth = cellArray[0];
-            const columnHeight = cellArray[1];
-            dataMatrix[rowWidth][columnHeight] = alive;
+            const row = cellArray[0];
+            const col = cellArray[1];
+            let nextMatrix = copyMatrix(dataMatrix);
+            nextMatrix[row][col] = alive;
+            dataMatrix = nextMatrix;
         }
 
         pixelCanvas.on("click", "td", function(e) {
@@ -137,13 +147,7 @@ $(function() {
          * @param  {array} matrix
          * @return {array}
          */
-        function copyMatrix(matrix) {
-            "use strict";
-            const copy = matrix.map(elem => {
-                return [...elem];
-            });
-            return copy;
-        }
+
         // check to see if the value is outside the matrix
         // If it is, it appears on the opposite side
         /**
