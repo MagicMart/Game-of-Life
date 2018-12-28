@@ -105,17 +105,18 @@ $(function() {
      * @param  {number} columnHeight
      * @return {undefined}
      */
-    function displayMatrix(rowWidth, columnHeight) {
+    function displayMatrix(dataMatrix) {
         "use strict";
+        const size = dataMatrix[0].length;
         // remove old grid (if any)
         matrixNode.children().remove();
         // build grid
         let i2;
         let str = "";
-        for (i2 = 0; i2 < rowWidth; i2 += 1) {
+        for (i2 = 0; i2 < size; i2 += 1) {
             str += "<tr>";
             let i;
-            for (i = 0; i < columnHeight; i += 1) {
+            for (i = 0; i < size; i += 1) {
                 // use the dataMatrix array to determine
                 // what cells are red. 1 is red(alive). 0 is dead.
                 let text = i2 + " " + i;
@@ -136,7 +137,15 @@ $(function() {
 
     function lifeOrDeath(dataMatrix) {
         "use strict";
+        const size = dataMatrix[0].length - 1;
 
+        function copyMatrix(matrix) {
+            "use strict";
+            const copy = matrix.map(elem => {
+                return [...elem];
+            });
+            return copy;
+        }
         // check to see if the value is outside the matrix
         // If it is, it appears on the opposite side
         /**
@@ -147,8 +156,8 @@ $(function() {
         function checkEdge(num) {
             "use strict";
             if (num < 0) {
-                num = 19;
-            } else if (num > 19) {
+                num = size;
+            } else if (num > size) {
                 num = 0;
             }
             return num;
@@ -157,9 +166,9 @@ $(function() {
         // as determined by the rules
         let nextMatrix = copyMatrix(dataMatrix);
         let i;
-        for (i = 0; i <= 19; i += 1) {
+        for (i = 0; i <= size; i += 1) {
             let j;
-            for (j = 0; j <= 19; j += 1) {
+            for (j = 0; j <= size; j += 1) {
                 // determine the surroundings of the cell
                 // (the dataMatrix Array).
                 // 0 is dead. 1 is alive.
@@ -209,7 +218,7 @@ $(function() {
     function go() {
         const currentMatrix = dataMatrix;
         dataMatrix = lifeOrDeath(currentMatrix);
-        displayMatrix(20, 20);
+        displayMatrix(dataMatrix);
     }
 
     go();
