@@ -133,20 +133,9 @@ $(function() {
         }
         matrixNode.append(str);
     }
-    displayMatrix(20, 20);
-    // use split method to grap the class of the clicked cell -
-    // which contains the rowWidth and columnHeight number separated by "-".
 
-    // life or death?
-    /**
-     */
-    function lifeOrDeath() {
+    function lifeOrDeath(dataMatrix) {
         "use strict";
-        // make a copy of an array that has arrays inside it
-        /**
-         * @param  {array} matrix
-         * @return {array}
-         */
 
         // check to see if the value is outside the matrix
         // If it is, it appears on the opposite side
@@ -212,12 +201,22 @@ $(function() {
                 }
             }
         }
-        dataMatrix = copyMatrix(nextMatrix);
+        //dataMatrix = nextMatrix;
+        //displayMatrix(20, 20);
+        return nextMatrix;
+    }
+
+    function go() {
+        const currentMatrix = dataMatrix;
+        dataMatrix = lifeOrDeath(currentMatrix);
         displayMatrix(20, 20);
     }
 
+    go();
+
     const ticker = (function() {
         let intervalID;
+
         /**
          * @param  {boolean} start
          */
@@ -225,7 +224,7 @@ $(function() {
             "use strict";
             if (start) {
                 intervalID = setInterval(function() {
-                    lifeOrDeath();
+                    go();
                 }, 300);
             } else {
                 clearInterval(intervalID);
