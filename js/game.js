@@ -2,30 +2,40 @@
 /* global  $*/
 $(function() {
     "use strict";
-    // make an array of arrays that will
-    // (correspond to the grid that the user sees)
-    // and fill them with zeroes
-    /**
-     * @param {number} rowWidth
-     * @param {number} columnHeight
-     * @return {array}
-     */
-    function makeMatrix(size) {
-        const matrix = [];
-        let i = 0;
-        let j = 0;
-        while (i < size) {
-            matrix[i] = [];
-            while (j < size) {
-                matrix[i][j] = 0;
-                j += 1;
+
+    const matrix = (function() {
+        /**
+         * @param {number} rowWidth
+         * @param {number} columnHeight
+         * @return {array}
+         */
+        function makeMatrix(size) {
+            const matrix = [];
+            let i = 0;
+            let j = 0;
+            while (i < size) {
+                matrix[i] = [];
+                while (j < size) {
+                    matrix[i][j] = 0;
+                    j += 1;
+                }
+                i += 1;
+                j = 0;
             }
-            i += 1;
-            j = 0;
+            return matrix;
         }
-        return matrix;
-    }
-    let dataMatrix = makeMatrix(20);
+        let dataMatrix = makeMatrix(20);
+        function data() {
+            return dataMatrix;
+        }
+        function update(matrix) {
+            dataMatrix = matrix;
+        }
+        return {
+            data,
+            update
+        };
+    })();
 
     function copyMatrix(matrix) {
         "use strict";
@@ -63,9 +73,9 @@ $(function() {
         function updateMatrix(cellArray, alive = 1) {
             const row = cellArray[0];
             const col = cellArray[1];
-            let nextMatrix = copyMatrix(dataMatrix);
+            let nextMatrix = copyMatrix(matrix.data());
             nextMatrix[row][col] = alive;
-            dataMatrix = nextMatrix;
+            matrix.update(nextMatrix);
         }
 
         pixelCanvas.on("click", "td", function(e) {
@@ -216,9 +226,10 @@ $(function() {
     }
 
     function go() {
-        const currentMatrix = dataMatrix;
-        dataMatrix = lifeOrDeath(currentMatrix);
-        displayMatrix(dataMatrix);
+        const currentMatrix = matrix.data();
+        const newMatrix = lifeOrDeath(currentMatrix);
+        matrix.update(newMatrix);
+        displayMatrix(newMatrix);
     }
 
     go();
