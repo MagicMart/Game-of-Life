@@ -64,8 +64,6 @@ $(function() {
             return arr;
         };
 
-        // position is a classList split at "-"
-        // position[1] is row. position[2] is column
         /**
          * @param {array} cellArray
          * @param {number} alive
