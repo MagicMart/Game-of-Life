@@ -5,8 +5,7 @@ $(function() {
 
     const matrix = (function() {
         /**
-         * @param {number} rowWidth
-         * @param {number} columnHeight
+         * @param {number} size
          * @return {array}
          */
         function makeMatrix(size) {
@@ -38,7 +37,6 @@ $(function() {
     })();
 
     function copyMatrix(matrix) {
-        "use strict";
         const copy = matrix.map(elem => {
             return [...elem];
         });
@@ -58,7 +56,6 @@ $(function() {
         });
 
         const cellCoord = function(cell) {
-            "use strict";
             const coord = cell.querySelector(".coord");
             const arr = coord.textContent.split(" ");
             return arr;
@@ -107,14 +104,11 @@ $(function() {
         return pixelCanvas;
     })();
 
-    // displayMatrix
     /**
-     * @param  {number} rowWidth
-     * @param  {number} columnHeight
+     * @param  {array} dataMatrix
      * @return {undefined}
      */
     function displayMatrix(dataMatrix) {
-        "use strict";
         const size = dataMatrix[0].length;
         // remove old grid (if any)
         matrixNode.children().remove();
@@ -145,11 +139,9 @@ $(function() {
     }
 
     function lifeOrDeath(dataMatrix) {
-        "use strict";
         const size = dataMatrix[0].length - 1;
 
         function copyMatrix(matrix) {
-            "use strict";
             const copy = matrix.map(elem => {
                 return [...elem];
             });
@@ -163,7 +155,6 @@ $(function() {
          * @return {number}
          */
         function checkEdge(num) {
-            "use strict";
             if (num < 0) {
                 num = size;
             } else if (num > size) {
@@ -240,7 +231,6 @@ $(function() {
          * @param  {boolean} start
          */
         return function ticker(start) {
-            "use strict";
             if (start) {
                 intervalID = setInterval(function() {
                     go();
@@ -255,7 +245,6 @@ $(function() {
     beginClick.on(
         "click",
         (function() {
-            "use strict";
             let start = false;
             return function() {
                 start = start ? false : true;
