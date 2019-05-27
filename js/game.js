@@ -37,10 +37,7 @@ $(function() {
     })();
 
     function copyMatrix(matrix) {
-        const copy = matrix.map(elem => {
-            return [...elem];
-        });
-        return copy;
+        return matrix.map(row => row.map(col => col));
     }
 
     // the matrix
@@ -124,9 +121,9 @@ $(function() {
                 let text = i + " " + j;
                 str +=
                     dataMatrix[i][j] === 1
-                        ? "<td class=\"alive\">"
-                        : "<td class=\"dead\">";
-                str += "<span class=\"coord\">" + text + "</span>";
+                        ? '<td class="alive">'
+                        : '<td class="dead">';
+                str += '<span class="coord">' + text + "</span>";
                 str += "</td>";
 
                 j += 1;
@@ -142,10 +139,7 @@ $(function() {
         const size = dataMatrix[0].length - 1;
 
         function copyMatrix(matrix) {
-            const copy = matrix.map(elem => {
-                return [...elem];
-            });
-            return copy;
+            return matrix.map(row => row.map(col => col));
         }
         // check to see if the value is outside the matrix
         // If it is, it appears on the opposite side
