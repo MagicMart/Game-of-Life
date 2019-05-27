@@ -95,33 +95,24 @@ $(function() {
      * @param  {array} dataMatrix
      * @return {undefined}
      */
-    function displayMatrix(dataMatrix) {
-        const size = dataMatrix[0].length;
-        // remove old grid (if any)
+    function displayMatrix(matrix) {
         matrixNode.children().remove();
-        // build grid
-        let i = 0;
-        let j = 0;
-        let str = "";
-        while (i < size) {
-            str += "<tr>";
-            while (j < size) {
-                // use the dataMatrix array to determine
-                // what cells are red. 1 is red(alive). 0 is dead.
-                let text = i + " " + j;
-                str +=
-                    dataMatrix[i][j] === 1
-                        ? '<td class="alive">'
-                        : '<td class="dead">';
-                str += '<span class="coord">' + text + "</span>";
-                str += "</td>";
-
-                j += 1;
-            }
-            i += 1;
-            j = 0;
-            str += "</tr>";
-        }
+        const tdOpen = num =>
+            num === 1 ? "<td class='alive'>" : "<td class='dead'>";
+        const str = matrix.reduce((str, current, ir) => {
+            const row =
+                "<tr>" +
+                current
+                    .map(
+                        (col, ic) =>
+                            `${tdOpen(
+                                col
+                            )}<span class='coord'>${ir} ${ic}</span></td>`
+                    )
+                    .join("") +
+                "</tr>";
+            return (str += row);
+        }, "");
         matrixNode.append(str);
     }
 
