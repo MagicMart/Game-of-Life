@@ -91,29 +91,42 @@ $(function() {
         return pixelCanvas;
     })();
 
+    function buildMatrix(matrix) {
+        matrixNode.children().remove();
+        return matrixNode.append(
+            matrix.map(
+                (row, i) =>
+                    "<tr>" +
+                    row
+                        .map(
+                            (el, j) =>
+                                `<td><span class='coord'>${i} ${j}<span></td>`
+                        )
+                        .join("") +
+                    "</tr>"
+            )
+        );
+    }
+
     /**
      * @param  {array} dataMatrix
      * @return {undefined}
      */
     function displayMatrix(matrix) {
-        matrixNode.children().remove();
-        const tdOpen = num =>
-            num === 1 ? "<td class='alive'>" : "<td class='dead'>";
-        const str = matrix.reduce((str, current, ir) => {
-            const row =
-                "<tr>" +
-                current
-                    .map(
-                        (col, ic) =>
-                            `${tdOpen(
-                                col
-                            )}<span class='coord'>${ir} ${ic}</span></td>`
-                    )
-                    .join("") +
-                "</tr>";
-            return (str += row);
-        }, "");
-        matrixNode.append(str);
+        buildMatrix(matrix);
+        function fillMatrix(matrix) {
+            const td = Array.from(document.querySelectorAll("td"));
+
+            const flatMatrix = matrix.reduce((acc, current) => {
+                return acc.concat(current);
+            });
+            flatMatrix.forEach((el, i) =>
+                el === 1
+                    ? (td[i].className = "alive")
+                    : (td[i].className = "dead")
+            );
+        }
+        fillMatrix(matrix);
     }
 
     function lifeOrDeath(dataMatrix) {
