@@ -9,20 +9,10 @@ $(function() {
          * @return {array}
          */
         function makeMatrix(size) {
-            const matrix = [];
-            let i = 0;
-            let j = 0;
-            while (i < size) {
-                matrix[i] = [];
-                while (j < size) {
-                    matrix[i][j] = 0;
-                    j += 1;
-                }
-                i += 1;
-                j = 0;
-            }
-            return matrix;
+            const row = new Array(size).fill();
+            return new Array(size).fill(row);
         }
+
         let dataMatrix = makeMatrix(20);
         function data() {
             return dataMatrix;
