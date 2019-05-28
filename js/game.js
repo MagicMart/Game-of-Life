@@ -98,7 +98,7 @@ $(function() {
         return pixelCanvas;
     })();
 
-    function buildMatrix(matrix) {
+    function buildTable(matrix) {
         matrixNode.children().remove();
         return matrixNode.append(
             matrix.map(
@@ -213,7 +213,7 @@ $(function() {
         displayMatrix(newMatrix);
     }
 
-    buildMatrix(matrix.data());
+    buildTable(matrix.data());
 
     go();
 
