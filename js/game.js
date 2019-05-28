@@ -2,6 +2,8 @@
 /* global  $*/
 $(function() {
     "use strict";
+    const dead = "rgb(249, 234, 214)";
+    const alive = "rgb(220, 0, 0)";
 
     const matrix = (function() {
         /**
@@ -65,11 +67,11 @@ $(function() {
 
             // current cell will change color
 
-            if (currentColor === "rgba(0, 0, 0, 0)") {
-                $(e.target).css("background-color", "rgb(220, 0, 0)");
+            if (currentColor === dead) {
+                $(e.target).css("background-color", alive);
                 updateMatrix(cellCoord(e.target));
             } else {
-                $(e.target).css("background-color", "rgba(0, 0, 0, 0)");
+                $(e.target).css("background-color", dead);
                 updateMatrix(cellCoord(e.target), 0);
             }
         });
@@ -77,8 +79,8 @@ $(function() {
         pixelCanvas.on("mouseenter", "td", function(e) {
             if (mouseDown) {
                 const currentColor = $(e.target).css("background-color");
-                if (currentColor === "rgba(0, 0, 0, 0)") {
-                    $(e.target).css("background-color", "rgb(220, 0, 0)");
+                if (currentColor === dead) {
+                    $(e.target).css("background-color", alive);
                     updateMatrix(cellCoord(e.target));
                 }
                 // erase
@@ -113,7 +115,7 @@ $(function() {
      * @return {undefined}
      */
     function displayMatrix(matrix) {
-        buildMatrix(matrix);
+        // buildMatrix(matrix);
         function fillMatrix(matrix) {
             const td = Array.from(document.querySelectorAll("td"));
 
@@ -122,8 +124,8 @@ $(function() {
             });
             flatMatrix.forEach((el, i) =>
                 el === 1
-                    ? (td[i].className = "alive")
-                    : (td[i].className = "dead")
+                    ? (td[i].style.backgroundColor = alive)
+                    : (td[i].style.backgroundColor = dead)
             );
         }
         fillMatrix(matrix);
@@ -209,6 +211,8 @@ $(function() {
         matrix.update(newMatrix);
         displayMatrix(newMatrix);
     }
+
+    buildMatrix(matrix.data());
 
     go();
 

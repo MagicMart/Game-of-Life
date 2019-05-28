@@ -52,11 +52,10 @@ td {
 }
 
 .dead {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgb(249, 234, 214);
 }
 .alive {
     background-color: rgb(220, 0, 0);
-    color: rgb(220, 0, 0);
 }
 
 #begin {
