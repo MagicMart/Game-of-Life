@@ -51,13 +51,6 @@ td {
     width: 15px;
 }
 
-.dead {
-    background-color: rgb(249, 234, 214);
-}
-.alive {
-    background-color: rgb(220, 0, 0);
-}
-
 #begin {
     min-width: 48px;
     min-height: 48px;
