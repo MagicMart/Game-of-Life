@@ -2,8 +2,13 @@
 /* global  $*/
 $(function() {
     "use strict";
-    const dead = "rgb(249, 234, 214)";
+    const dead = "rgb(255, 255, 255)";
     const alive = "rgb(220, 0, 0)";
+
+    // set initial background colour for tds - dead
+    Array.from(document.querySelectorAll("td")).forEach(
+        el => (el.style.backgroundColor = dead)
+    );
 
     const matrix = (function() {
         /**
