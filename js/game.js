@@ -60,8 +60,7 @@ $(function() {
          * @param {number} alive
          */
         function updateMatrix(cellArray, alive = 1) {
-            const row = cellArray[0];
-            const col = cellArray[1];
+            const [row, col] = cellArray;
             let nextMatrix = copyMatrix(matrix.data());
             nextMatrix[row][col] = alive;
             matrix.update(nextMatrix);
