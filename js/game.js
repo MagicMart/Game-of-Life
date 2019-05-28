@@ -120,20 +120,16 @@ $(function() {
      * @return {undefined}
      */
     function displayMatrix(matrix) {
-        // buildMatrix(matrix);
-        function fillMatrix(matrix) {
-            const td = Array.from(document.querySelectorAll("td"));
+        const td = Array.from(document.querySelectorAll("td"));
 
-            const flatMatrix = matrix.reduce((acc, current) => {
-                return acc.concat(current);
-            });
-            flatMatrix.forEach((el, i) =>
-                el === 1
-                    ? (td[i].style.backgroundColor = alive)
-                    : (td[i].style.backgroundColor = dead)
-            );
-        }
-        fillMatrix(matrix);
+        const flatMatrix = matrix.reduce((acc, current) => {
+            return acc.concat(current);
+        });
+        flatMatrix.forEach((el, i) =>
+            el === 1
+                ? (td[i].style.backgroundColor = alive)
+                : (td[i].style.backgroundColor = dead)
+        );
     }
 
     function lifeOrDeath(dataMatrix) {
