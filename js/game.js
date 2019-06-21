@@ -4,6 +4,8 @@ $(function() {
     "use strict";
     const dead = "rgb(255, 255, 255)";
     const alive = "rgb(220, 0, 0)";
+    let ticking = false;
+    const beginClick = $("#begin");
 
     // set initial background colour for tds - dead
     Array.from(document.querySelectorAll("td")).forEach(
@@ -67,6 +69,9 @@ $(function() {
         }
 
         pixelCanvas.on("click", "td", function(e) {
+            if(ticking) {
+                  beginClick.click();
+            }
             const currentColor = $(e.target).css("background-color");
 
             // current cell will change color
@@ -82,16 +87,19 @@ $(function() {
         // paint when mouse held down
         pixelCanvas.on("mouseenter", "td", function(e) {
             if (mouseDown) {
+                if(ticking) {
+                    beginClick.click();
+              }
                 const currentColor = $(e.target).css("background-color");
                 if (currentColor === dead) {
                     $(e.target).css("background-color", alive);
                     updateMatrix(cellCoord(e.target));
                 }
-                // erase
-                // else {
-                //     $(e.target).css("background-color", "rgba(0, 0, 0, 0)");
-                //     updateMatrix(cellCoord(e.target), 0);
-                // }
+                
+                else {
+                    $(e.target).css("background-color", dead);
+                    updateMatrix(cellCoord(e.target), 0);
+                }
             }
         });
         return pixelCanvas;
@@ -220,10 +228,10 @@ $(function() {
         let intervalID;
 
         /**
-         * @param  {boolean} start
+         * @param  {boolean} ticking
          */
-        return function ticker(start) {
-            if (start) {
+        return function ticker(ticking) {
+            if (ticking) {
                 intervalID = setInterval(function() {
                     go();
                 }, 300);
@@ -233,14 +241,11 @@ $(function() {
         };
     })();
 
-    const beginClick = $("#begin");
     beginClick.on(
         "click",
-        (function() {
-            let start = false;
-            return function() {
-                start = start ? false : true;
-                if (start) {
+            function() {
+                ticking = ticking ? false : true;
+                if (ticking) {
                     $("#begin")
                         .css("background-color", "red")
                         .val("Stop");
@@ -249,8 +254,7 @@ $(function() {
                         .css("background-color", "green")
                         .val("Start");
                 }
-                ticker(start);
-            };
-        })()
+                ticker(ticking);
+            }
     );
 });
