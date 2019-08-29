@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Game of Life</title>
+        <link
+            href="https://fonts.googleapis.com/css?family=Monoton"
+            rel="stylesheet"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Game of Life</title>
-    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <body>
+        <h1>Life</h1>
+        <table id="pixel_canvas"></table>
+        <p>Make a shape. Then click for life!</p>
 
-<body>
-    <h1>Life</h1>
-    <table id="pixel_canvas"></table>
-    <p>Make a shape. Then click for life!</p>
+        <div class="input-container">
+            <form>
+                <input type="button" id="begin" value="Start" />
 
-    <form>
-        <input type="button" id="begin" value="Start">
-    </form>
+                <input
+                    type="range"
+                    min="100"
+                    max="500"
+                    value="300"
+                    class="slider"
+                    id="myRange"
+                />
+            </form>
+        </div>
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script src="js/game.js"></script>
-</body>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="js/game.js"></script>
+    </body>
 </html>

@@ -70,8 +70,8 @@ $(function() {
         }
 
         pixelCanvas.on("click", "td", function(e) {
-            if(ticking) {
-                  beginClick.click();
+            if (ticking) {
+                beginClick.click();
             }
             const currentColor = $(e.target).css("background-color");
 
@@ -88,16 +88,14 @@ $(function() {
         // paint when mouse held down
         pixelCanvas.on("mouseenter", "td", function(e) {
             if (mouseDown) {
-                if(ticking) {
+                if (ticking) {
                     beginClick.click();
-              }
+                }
                 const currentColor = $(e.target).css("background-color");
                 if (currentColor === dead) {
                     $(e.target).css("background-color", alive);
                     updateMatrix(cellCoord(e.target));
-                }
-                
-                else {
+                } else {
                     $(e.target).css("background-color", dead);
                     updateMatrix(cellCoord(e.target), 0);
                 }
@@ -242,20 +240,23 @@ $(function() {
         };
     })();
 
-    beginClick.on(
-        "click",
-            function() {
-                ticking = ticking ? false : true;
-                if (ticking) {
-                    $("#begin")
-                        .css("background-color", "red")
-                        .val("Stop");
-                } else {
-                    $("#begin")
-                        .css("background-color", "green")
-                        .val("Start");
-                }
-                ticker(ticking);
-            }
-    );
+    beginClick.on("click", function() {
+        ticking = ticking ? false : true;
+        if (ticking) {
+            $("#begin")
+                .css("background-color", "red")
+                .val("Stop");
+        } else {
+            $("#begin")
+                .css("background-color", "green")
+                .val("Start");
+        }
+        ticker(ticking);
+    });
+
+    $(".input-container").on("change", event => {
+        ticker(false);
+        tickSpeed = 600 - event.target.value;
+        ticker(true);
+    });
 });
