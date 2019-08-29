@@ -5,6 +5,7 @@ $(function() {
     const dead = "rgb(255, 255, 255)";
     const alive = "rgb(220, 0, 0)";
     let ticking = false;
+    let tickSpeed = 300;
     const beginClick = $("#begin");
 
     // set initial background colour for tds - dead
@@ -234,7 +235,7 @@ $(function() {
             if (ticking) {
                 intervalID = setInterval(function() {
                     go();
-                }, 300);
+                }, tickSpeed);
             } else {
                 clearInterval(intervalID);
             }
