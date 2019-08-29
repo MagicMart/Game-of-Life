@@ -241,7 +241,7 @@ $(function() {
     })();
 
     beginClick.on("click", function() {
-        ticking = ticking ? false : true;
+        ticking = !ticking;
         if (ticking) {
             $("#begin")
                 .css("background-color", "red")
@@ -256,7 +256,9 @@ $(function() {
 
     $(".input-container").on("change", event => {
         ticker(false);
+        ticking = false;
         tickSpeed = 600 - event.target.value;
         ticker(true);
+        ticking = true;
     });
 });
