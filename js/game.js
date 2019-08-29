@@ -229,8 +229,8 @@ $(function() {
         /**
          * @param  {boolean} ticking
          */
-        return function ticker(ticking) {
-            if (ticking) {
+        return function ticker(startTicking) {
+            if (startTicking) {
                 intervalID = setInterval(function() {
                     go();
                 }, tickSpeed);
@@ -254,11 +254,13 @@ $(function() {
         ticker(ticking);
     });
 
-    $(".input-container").on("change", event => {
-        ticker(false);
-        ticking = false;
-        tickSpeed = 600 - event.target.value;
-        ticker(true);
-        ticking = true;
+    $("#myRange").on("change", event => {
+        if (ticking) {
+            ticker(false);
+            tickSpeed = 600 - event.target.value;
+            ticker(true);
+        } else {
+            tickSpeed = 600 - event.target.value;
+        }
     });
 });
