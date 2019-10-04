@@ -9,19 +9,19 @@ html {
 
 body {
     text-align: center;
-    background-color: rgb(250, 235, 215);
-    color: rgb(250, 235, 215);
+    background-color: #292725;
+    color: #faebd7;
 }
 
 p {
-    color: black;
+    color: #ffffff;
 }
 
 h1 {
     font-family: Monoton, cursive;
     font-size: 35px;
     margin: 0.2em;
-    color: rgb(255, 128, 128);
+    color: #ff8080;
 }
 
 h2 {
@@ -35,7 +35,7 @@ h2:first-of-type {
 table,
 tr,
 td {
-    border: 1px solid black;
+    border: 1px solid #000000;
 }
 
 table {
@@ -54,8 +54,8 @@ td {
 #begin {
     min-width: 48px;
     min-height: 48px;
-    background-color: green;
-    color: white;
+    background-color: #066406;
+    color: #ffffff;
 }
 
 .coord {
