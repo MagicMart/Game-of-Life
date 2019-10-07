@@ -55,7 +55,7 @@ $(function() {
         });
 
         /**
-         * Graps the text content from the hidden span element:
+         * Grabs the text content from the hidden span element:
          * the coordinate of the table cell clicked on.
          * @param {Object} cell event.target
          * @return {Array} [row, column]
