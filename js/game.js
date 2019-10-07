@@ -1,5 +1,5 @@
-/* jslint browser: true*/
-/* global  $*/
+// @ts-check
+
 $(function() {
     "use strict";
     const dead = "rgb(255, 255, 255)";
@@ -14,16 +14,14 @@ $(function() {
     );
 
     const matrix = (function() {
-        /**
-         * @param {number} size
-         * @return {array}
-         */
         function makeMatrix(size) {
             const row = new Array(size).fill();
             return new Array(size).fill(row);
         }
 
         let dataMatrix = makeMatrix(20);
+
+        /** Returns the current state of the matrix */
         function data() {
             return dataMatrix;
         }
@@ -36,6 +34,10 @@ $(function() {
         };
     })();
 
+    /**
+     *
+     * returns a copy of the matrix
+     */
     function copyMatrix(matrix) {
         return matrix.map(row => row.map(col => col));
     }
@@ -52,16 +54,15 @@ $(function() {
             mouseDown = false;
         });
 
+        /**
+         * @param {Object} cell event.target
+         */
         const cellCoord = function(cell) {
             const coord = cell.querySelector(".coord");
             const arr = coord.textContent.split(" ");
             return arr;
         };
 
-        /**
-         * @param {array} cellArray
-         * @param {number} alive
-         */
         function updateMatrix(cellArray, alive = 1) {
             const [row, col] = cellArray;
             let nextMatrix = copyMatrix(matrix.data());
@@ -121,10 +122,6 @@ $(function() {
         );
     }
 
-    /**
-     * @param  {array} dataMatrix
-     * @return {undefined}
-     */
     function displayMatrix(matrix) {
         const td = Array.from(document.querySelectorAll("td"));
 
@@ -144,13 +141,10 @@ $(function() {
         function copyMatrix(matrix) {
             return matrix.map(row => row.map(col => col));
         }
-        // check to see if the value is outside the matrix
-        // If it is, it appears on the opposite side
-        /**
-         *
-         * @param {number} num
-         * @return {number}
-         */
+
+        /**check to see if the row or column coordinate
+         * is outside the matrix. If it is,
+         * it evaluates to the opposite side of the matrix  */
         function checkEdge(num) {
             if (num < 0) {
                 num = size;
@@ -159,8 +153,9 @@ $(function() {
             }
             return num;
         }
-        // nextMatrix will be the next state of dataMatrix
-        // as determined by the rules
+
+        /**nextMatrix will be the next state of dataMatrix
+        as determined by the rules */
         let nextMatrix = copyMatrix(dataMatrix);
         let i;
         for (i = 0; i <= size; i += 1) {
@@ -207,8 +202,7 @@ $(function() {
                 }
             }
         }
-        //dataMatrix = nextMatrix;
-        //displayMatrix(20, 20);
+
         return nextMatrix;
     }
 
@@ -225,10 +219,6 @@ $(function() {
 
     const ticker = (function() {
         let intervalID;
-
-        /**
-         * @param  {boolean} ticking
-         */
         return function ticker(startTicking) {
             if (startTicking) {
                 intervalID = setInterval(function() {
