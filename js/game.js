@@ -55,16 +55,21 @@ $(function() {
         });
 
         /**
+         * Graps the text content from the hidden span element:
+         * the coordinate of the table cell clicked on.
          * @param {Object} cell event.target
+         * @return {Array} [row, column]
          */
         const cellCoord = function(cell) {
             const coord = cell.querySelector(".coord");
             const arr = coord.textContent.split(" ");
             return arr;
         };
-
-        function updateMatrix(cellArray, alive = 1) {
-            const [row, col] = cellArray;
+        /**
+         * @param {Array} param0 matrix cell coordinate
+         * @param {number} alive
+         */
+        function updateMatrix([row, col], alive = 1) {
             let nextMatrix = copyMatrix(matrix.data());
             nextMatrix[row][col] = alive;
             matrix.update(nextMatrix);
