@@ -250,12 +250,13 @@ $(function() {
     });
 
     $("#myRange").on("change", event => {
+        const sliderValue = Number(event.target.value);
         if (ticking) {
             ticker(false);
-            tickSpeed = 600 - event.target.value;
+            tickSpeed = 600 - sliderValue;
             ticker(true);
         } else {
-            tickSpeed = 600 - event.target.value;
+            tickSpeed = 600 - sliderValue;
         }
     });
 });
