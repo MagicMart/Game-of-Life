@@ -188,14 +188,9 @@ $(function() {
         /**nextMatrix will be the next state of dataMatrix
         as determined by the rules */
         let nextMatrix = copyMatrix(dataMatrix);
-        let i;
-        for (i = 0; i <= size; i += 1) {
-            let j;
-            for (j = 0; j <= size; j += 1) {
-                // determine the surroundings of the cell
-                // (the dataMatrix Array).
-                // 0 is dead. 1 is alive.
-                // if a cell is at the edge, check the opposite side
+
+        dataMatrix.forEach((row, i) => {
+            row.forEach((el, j) => {
                 const top = dataMatrix[checkEdge(i - 1)][j];
                 const topRight = dataMatrix[checkEdge(i - 1)][checkEdge(j + 1)];
 
@@ -231,8 +226,8 @@ $(function() {
                 } else if (sum !== 2) {
                     nextMatrix[i][j] = 0;
                 }
-            }
-        }
+            });
+        });
 
         return nextMatrix;
     }
