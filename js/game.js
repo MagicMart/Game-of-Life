@@ -15,7 +15,7 @@ $(function() {
 
     const matrix = (function() {
         function makeMatrix(size) {
-            const row = new Array(size).fill();
+            const row = new Array(size).fill(0);
             return new Array(size).fill(row);
         }
 
