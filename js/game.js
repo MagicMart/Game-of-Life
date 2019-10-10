@@ -13,6 +13,13 @@ $(function() {
         el => (el.style.backgroundColor = dead)
     );
 
+    /**
+     * @param {Array<Array<number>>} matrix
+     */
+    function copyMatrix(matrix) {
+        return matrix.map(row => row.map(col => col));
+    }
+
     const matrix = (function() {
         /**
          * @param {number} size
@@ -41,13 +48,6 @@ $(function() {
             update
         };
     })();
-
-    /**
-     * @param {Array<Array<number>>} matrix
-     */
-    function copyMatrix(matrix) {
-        return matrix.map(row => row.map(col => col));
-    }
 
     // the matrix
     const matrixNode = (function() {
@@ -162,13 +162,6 @@ $(function() {
      */
     function lifeOrDeath(dataMatrix) {
         const size = dataMatrix[0].length - 1;
-        /**
-         *
-         * @param {Array<Array<number>>} matrix
-         */
-        function copyMatrix(matrix) {
-            return matrix.map(row => row.map(col => col));
-        }
 
         /**check to see if the row or column coordinate
          * is outside the matrix. If it is,
