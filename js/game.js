@@ -191,32 +191,18 @@ $(function() {
 
         dataMatrix.forEach((row, i) => {
             row.forEach((el, j) => {
-                const top = dataMatrix[checkEdge(i - 1)][j];
-                const topRight = dataMatrix[checkEdge(i - 1)][checkEdge(j + 1)];
-
-                const right = dataMatrix[i][checkEdge(j + 1)];
-
-                const bottomRight =
-                    dataMatrix[checkEdge(i + 1)][checkEdge(j + 1)];
-
-                const bottom = dataMatrix[checkEdge(i + 1)][j];
-
-                const bottomLeft =
-                    dataMatrix[checkEdge(i + 1)][checkEdge(j - 1)];
-
-                const left = dataMatrix[i][checkEdge(j - 1)];
-
-                const topLeft = dataMatrix[checkEdge(i - 1)][checkEdge(j - 1)];
-
+                /** sum is the sum of values in the surrounding cells
+                 * (in clockwise order)
+                 */
                 const sum =
-                    top +
-                    topRight +
-                    right +
-                    bottomRight +
-                    bottom +
-                    bottomLeft +
-                    left +
-                    topLeft;
+                    dataMatrix[checkEdge(i - 1)][j] +
+                    dataMatrix[checkEdge(i - 1)][checkEdge(j + 1)] +
+                    dataMatrix[i][checkEdge(j + 1)] +
+                    dataMatrix[checkEdge(i + 1)][checkEdge(j + 1)] +
+                    dataMatrix[checkEdge(i + 1)][j] +
+                    dataMatrix[checkEdge(i + 1)][checkEdge(j - 1)] +
+                    dataMatrix[i][checkEdge(j - 1)] +
+                    dataMatrix[checkEdge(i - 1)][checkEdge(j - 1)];
 
                 // apply the rules of the Conway's game of life.
                 // https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
