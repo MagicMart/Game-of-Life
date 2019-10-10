@@ -43,6 +43,7 @@ $(function() {
          */
         function update(matrix) {
             dataMatrix = matrix;
+            return dataMatrix;
         }
         return {
             data,
@@ -213,10 +214,7 @@ $(function() {
     }
 
     function go() {
-        const currentMatrix = matrix.data();
-        const newMatrix = lifeOrDeath(currentMatrix);
-        matrix.update(newMatrix);
-        displayMatrix(newMatrix);
+        displayMatrix(matrix.update(lifeOrDeath(matrix.data())));
     }
 
     buildTable(matrix.data());
