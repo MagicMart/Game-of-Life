@@ -164,6 +164,9 @@ $(function() {
      * @param {Array<Array<number>>} dataMatrix
      */
     function lifeOrDeath(dataMatrix) {
+        /**
+         * @type {number} the length of a row
+         */
         const size = dataMatrix[0].length - 1;
 
         /**check to see if the row or column coordinate
