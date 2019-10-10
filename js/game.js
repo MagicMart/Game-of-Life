@@ -15,6 +15,7 @@ $(function() {
 
     /**
      * @param {Array<Array<number>>} matrix
+     * @returns {Array<Array<number>>} a deep copy of the matrix
      */
     function copyMatrix(matrix) {
         return matrix.map(row => row.map(col => col));
