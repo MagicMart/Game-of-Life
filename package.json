@@ -18,5 +18,8 @@
     "homepage": "https://github.com/MagicMart/Game-of-Life#readme",
     "devDependencies": {
         "eslint": "^5.11.1"
+    },
+    "dependencies": {
+        "@types/jquery": "^3.3.31"
     }
 }
