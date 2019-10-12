@@ -186,10 +186,8 @@ $(function() {
 
         /**nextMatrix will be the next state of dataMatrix
         as determined by the rules */
-        let nextMatrix = copyMatrix(dataMatrix);
-
-        dataMatrix.forEach((row, i) => {
-            row.forEach((el, j) => {
+        const nextMatrix = dataMatrix.map((row, i) => {
+            return row.map((current, j) => {
                 /** sum is the sum of values in the surrounding cells
                  * (in clockwise order)
                  */
@@ -207,9 +205,11 @@ $(function() {
                 // https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
                 if (sum === 3) {
-                    nextMatrix[i][j] = 1;
-                } else if (sum !== 2) {
-                    nextMatrix[i][j] = 0;
+                    return 1;
+                } else if (sum === 2) {
+                    return current;
+                } else {
+                    return 0;
                 }
             });
         });
