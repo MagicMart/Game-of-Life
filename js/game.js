@@ -18,7 +18,7 @@ $(function() {
      * @returns {Array<Array<number>>} a deep copy of the matrix
      */
     function copyMatrix(matrix) {
-        return matrix.map(row => row.map(col => col));
+        return matrix.map(row => row.slice());
     }
 
     const matrix = (function() {
