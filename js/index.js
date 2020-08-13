@@ -67,11 +67,11 @@ $(function () {
          * Grabs the text content from the hidden span element:
          * the coordinate of the table cell clicked on.
          * @param {Object} cell event.target
-         * @returns {Array<number>} [row, column]
+         * @returns {Array<string>} [row, column]
          */
         const cellCoord = function (cell) {
             const coord = cell.querySelector(".coord");
-            /**@type {Array<number>} */
+            /**@type {Array<string>} */
             const arr = coord.textContent.split(" ");
             return arr;
         };
