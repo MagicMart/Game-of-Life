@@ -1,6 +1,6 @@
 // @ts-check
 
-$(function() {
+$(function () {
     "use strict";
     const dead = "rgb(255, 255, 255)";
     const alive = "rgb(220, 0, 0)";
@@ -10,7 +10,7 @@ $(function() {
 
     // set initial background colour for tds - dead
     Array.from(document.querySelectorAll("td")).forEach(
-        el => (el.style.backgroundColor = dead)
+        (el) => (el.style.backgroundColor = dead)
     );
 
     /**
@@ -18,10 +18,10 @@ $(function() {
      * @returns {Array<Array<number>>} a deep copy of the matrix
      */
     function copyMatrix(matrix) {
-        return matrix.map(row => row.slice());
+        return matrix.map((row) => row.slice());
     }
 
-    const matrix = (function() {
+    const matrix = (function () {
         /**
          * @param {number} size
          * @returns {Array<Array<number>>}
@@ -47,19 +47,19 @@ $(function() {
         }
         return {
             data,
-            update
+            update,
         };
     })();
 
     // the matrix
-    const matrixNode = (function() {
+    const matrixNode = (function () {
         const pixelCanvas = $("#pixel_canvas");
         let mouseDown;
-        pixelCanvas.on("mousedown", function() {
+        pixelCanvas.on("mousedown", function () {
             mouseDown = true;
             return false;
         });
-        $("body").on("mouseup", function() {
+        $("body").on("mouseup", function () {
             mouseDown = false;
         });
 
@@ -69,7 +69,7 @@ $(function() {
          * @param {Object} cell event.target
          * @returns {Array<number>} [row, column]
          */
-        const cellCoord = function(cell) {
+        const cellCoord = function (cell) {
             const coord = cell.querySelector(".coord");
             const arr = coord.textContent.split(" ");
             return arr;
@@ -84,7 +84,7 @@ $(function() {
             matrix.update(nextMatrix);
         }
 
-        pixelCanvas.on("click", "td", function(e) {
+        pixelCanvas.on("click", "td", function (e) {
             if (ticking) {
                 beginClick.click();
             }
@@ -101,7 +101,7 @@ $(function() {
             }
         });
         // paint when mouse held down
-        pixelCanvas.on("mouseenter", "td", function(e) {
+        pixelCanvas.on("mouseenter", "td", function (e) {
             if (mouseDown) {
                 if (ticking) {
                     beginClick.click();
@@ -226,11 +226,11 @@ $(function() {
 
     go();
 
-    const ticker = (function() {
+    const ticker = (function () {
         let intervalID;
         return function ticker(startTicking) {
             if (startTicking) {
-                intervalID = setInterval(function() {
+                intervalID = setInterval(function () {
                     go();
                 }, tickSpeed);
             } else {
@@ -239,16 +239,12 @@ $(function() {
         };
     })();
 
-    beginClick.on("click", function() {
+    beginClick.on("click", function () {
         ticking = !ticking;
         if (ticking) {
-            $("#begin")
-                .css("background-color", "red")
-                .val("Stop");
+            $("#begin").css("background-color", "red").val("Stop");
         } else {
-            $("#begin")
-                .css("background-color", "green")
-                .val("Start");
+            $("#begin").css("background-color", "green").val("Start");
         }
         ticker(ticking);
     });
@@ -258,7 +254,7 @@ $(function() {
         /**
          * @param {Object} event
          */
-        event => {
+        (event) => {
             const sliderValue = Number(event.target.value);
             if (ticking) {
                 ticker(false);

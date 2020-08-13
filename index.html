@@ -1,36 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Game of Life</title>
+        <link
+            href="https://fonts.googleapis.com/css?family=Monoton"
+            rel="stylesheet"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="css/style.css" />
+        <script
+            defer
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"
+        ></script>
+        <script defer src="js/index.js"></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <title>Game of Life</title>
-    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="css/style.css" />
-    <script defer src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script defer src="js/index.js"></script>
-</head>
-
-<body>
-    <header>
-        <div class="container">
-            <h1>Life</h1>
-        </div>
-    </header>
-    <main>
-        <div class="container">
-            <table id="pixel_canvas"></table>
-            <p>Make a shape. Then click for life!</p>
-            <form>
-                <input type="button" id="begin" value="Start" />
-                <input type="range" min="100" max="500" value="300" class="slider" id="myRange"
-                    aria-label="change speed" />
-            </form>
-        </div>
-    </main>
-
-
-</body>
-
+    <body>
+        <header>
+            <div class="container">
+                <h1>Life</h1>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                <table id="pixel_canvas"></table>
+                <p>Make a shape. Then click for life!</p>
+                <form>
+                    <input type="button" id="begin" value="Start" />
+                    <input
+                        type="range"
+                        min="100"
+                        max="500"
+                        value="300"
+                        class="slider"
+                        id="myRange"
+                        aria-label="change speed"
+                    />
+                </form>
+            </div>
+        </main>
+    </body>
 </html>
