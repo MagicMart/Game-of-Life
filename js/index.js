@@ -71,6 +71,7 @@ $(function () {
          */
         const cellCoord = function (cell) {
             const coord = cell.querySelector(".coord");
+            /**@type {Array<number>} */
             const arr = coord.textContent.split(" ");
             return arr;
         };
