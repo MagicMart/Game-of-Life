@@ -66,17 +66,16 @@ $(function () {
         /**
          * Grabs the text content from the hidden span element:
          * the coordinate of the table cell clicked on.
-         * @param {Object} cell event.target
+         * @param {HTMLTableCellElement} cell event.target
          * @returns {Array<string>} [row, column]
          */
         const cellCoord = function (cell) {
             const coord = cell.querySelector(".coord");
-            /**@type {Array<string>} */
             const arr = coord.textContent.split(" ");
             return arr;
         };
         /**
-         * @param {Array} param0 matrix cell coordinate
+         * @param {Array<string>} param0 matrix cell coordinate
          * @param {"alive" | "dead"} state
          */
         function updateMatrix([row, col], state) {
