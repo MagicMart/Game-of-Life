@@ -2,15 +2,15 @@
 
 $(function () {
     "use strict";
-    const dead = "rgb(255, 255, 255)";
-    const alive = "rgb(220, 0, 0)";
+    const deadRGB = "rgb(255, 255, 255)";
+    const aliveRGB = "rgb(220, 0, 0)";
     let ticking = false;
     let tickSpeed = 300;
     const beginClick = $("#begin");
 
     // set initial background colour for tds - dead
     Array.from(document.querySelectorAll("td")).forEach(
-        (el) => (el.style.backgroundColor = dead)
+        (el) => (el.style.backgroundColor = deadRGB)
     );
 
     /**
@@ -93,11 +93,11 @@ $(function () {
 
             // current cell will change color
 
-            if (currentColor === dead) {
-                $(e.target).css("background-color", alive);
+            if (currentColor === deadRGB) {
+                $(e.target).css("background-color", aliveRGB);
                 updateMatrix(cellCoord(e.target), "alive");
             } else {
-                $(e.target).css("background-color", dead);
+                $(e.target).css("background-color", deadRGB);
                 updateMatrix(cellCoord(e.target), "dead");
             }
         });
@@ -108,11 +108,11 @@ $(function () {
                     beginClick.click();
                 }
                 const currentColor = $(e.target).css("background-color");
-                if (currentColor === dead) {
-                    $(e.target).css("background-color", alive);
+                if (currentColor === deadRGB) {
+                    $(e.target).css("background-color", aliveRGB);
                     updateMatrix(cellCoord(e.target), "alive");
                 } else {
-                    $(e.target).css("background-color", dead);
+                    $(e.target).css("background-color", deadRGB);
                     updateMatrix(cellCoord(e.target), "dead");
                 }
             }
@@ -155,8 +155,8 @@ $(function () {
 
         flatMatrix.forEach((el, i) =>
             el === 1
-                ? (td[i].style.backgroundColor = alive)
-                : (td[i].style.backgroundColor = dead)
+                ? (td[i].style.backgroundColor = aliveRGB)
+                : (td[i].style.backgroundColor = deadRGB)
         );
     }
     /**
