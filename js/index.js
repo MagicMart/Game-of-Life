@@ -77,11 +77,11 @@ $(function () {
         };
         /**
          * @param {Array} param0 matrix cell coordinate
-         * @param {number} alive
+         * @param {"alive" | "dead"} state
          */
-        function updateMatrix([row, col], alive = 1) {
+        function updateMatrix([row, col], state) {
             let nextMatrix = copyMatrix(matrix.data());
-            nextMatrix[row][col] = alive;
+            nextMatrix[row][col] = state === "alive" ? 1 : 0;
             matrix.update(nextMatrix);
         }
 
@@ -95,10 +95,10 @@ $(function () {
 
             if (currentColor === dead) {
                 $(e.target).css("background-color", alive);
-                updateMatrix(cellCoord(e.target));
+                updateMatrix(cellCoord(e.target), "alive");
             } else {
                 $(e.target).css("background-color", dead);
-                updateMatrix(cellCoord(e.target), 0);
+                updateMatrix(cellCoord(e.target), "dead");
             }
         });
         // paint when mouse held down
@@ -110,10 +110,10 @@ $(function () {
                 const currentColor = $(e.target).css("background-color");
                 if (currentColor === dead) {
                     $(e.target).css("background-color", alive);
-                    updateMatrix(cellCoord(e.target));
+                    updateMatrix(cellCoord(e.target), "alive");
                 } else {
                     $(e.target).css("background-color", dead);
-                    updateMatrix(cellCoord(e.target), 0);
+                    updateMatrix(cellCoord(e.target), "dead");
                 }
             }
         });
