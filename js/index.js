@@ -85,35 +85,37 @@ $(function () {
             matrix.update(nextMatrix);
         }
 
-        pixelCanvas.on("click", "td", function (e) {
+        pixelCanvas.on("click", "td", function (event) {
+            const target = event.target;
             if (ticking) {
                 beginClick.click();
             }
-            const currentColor = $(e.target).css("background-color");
+            const currentColor = $(target).css("background-color");
 
             // current cell will change color
 
             if (currentColor === deadRGB) {
-                $(e.target).css("background-color", aliveRGB);
-                updateMatrix(cellCoord(e.target), "alive");
+                $(target).css("background-color", aliveRGB);
+                updateMatrix(cellCoord(target), "alive");
             } else {
-                $(e.target).css("background-color", deadRGB);
-                updateMatrix(cellCoord(e.target), "dead");
+                $(target).css("background-color", deadRGB);
+                updateMatrix(cellCoord(target), "dead");
             }
         });
         // paint when mouse held down
-        pixelCanvas.on("mouseenter", "td", function (e) {
+        pixelCanvas.on("mouseenter", "td", function (event) {
+            const target = event.target;
             if (mouseDown) {
                 if (ticking) {
                     beginClick.click();
                 }
-                const currentColor = $(e.target).css("background-color");
+                const currentColor = $(target).css("background-color");
                 if (currentColor === deadRGB) {
-                    $(e.target).css("background-color", aliveRGB);
-                    updateMatrix(cellCoord(e.target), "alive");
+                    $(target).css("background-color", aliveRGB);
+                    updateMatrix(cellCoord(target), "alive");
                 } else {
-                    $(e.target).css("background-color", deadRGB);
-                    updateMatrix(cellCoord(e.target), "dead");
+                    $(target).css("background-color", deadRGB);
+                    updateMatrix(cellCoord(target), "dead");
                 }
             }
         });
