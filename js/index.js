@@ -8,11 +8,6 @@ $(function () {
     let tickSpeed = 300;
     const beginClick = $("#begin");
 
-    // set initial background colour for tds - dead
-    Array.from(document.querySelectorAll("td")).forEach(
-        (el) => (el.style.backgroundColor = deadRGB)
-    );
-
     /**
      * @param {Array<Array<number>>} matrix
      * @returns {Array<Array<number>>} a deep copy of the matrix
@@ -146,7 +141,7 @@ $(function () {
      * @param {Array<Array<number>>} matrix
      */
     function displayMatrix(matrix) {
-        const td = Array.from(document.querySelectorAll("td"));
+        const td = Array.from($("td"));
         /**
          * @type {Array<number>}
          */
