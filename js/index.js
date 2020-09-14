@@ -9,8 +9,8 @@ $(function () {
     const beginClick = $("#begin");
 
     /**
-     * @param {Array<Array<number>>} matrix
-     * @returns {Array<Array<number>>} a deep copy of the matrix
+     * @param {(0 |1)[][]} matrix
+     * @returns {(0 |1)[][]} a deep copy of the matrix
      */
     function copyMatrix(matrix) {
         return matrix.map((row) => row.slice());
@@ -19,7 +19,7 @@ $(function () {
     const matrix = (function () {
         /**
          * @param {number} size
-         * @returns {Array<Array<number>>}
+         * @returns {(0 |1)[][]}
          */
         function makeMatrix(size) {
             const row = new Array(size).fill(0);
@@ -34,7 +34,7 @@ $(function () {
         }
         /**
          *
-         * @param {Array<Array<number>>} matrix
+         * @param {(0 |1)[][]} matrix
          */
         function update(matrix) {
             dataMatrix = matrix;
@@ -62,7 +62,7 @@ $(function () {
          * Grabs the text content from the hidden span element:
          * the coordinate of the table cell clicked on.
          * @param {HTMLTableCellElement} cell event.target
-         * @returns {Array<string>} [row, column]
+         * @returns {string[]} [row, column]
          */
         const cellCoord = function (cell) {
             const coord = cell.querySelector(".coord");
@@ -70,7 +70,7 @@ $(function () {
             return arr;
         };
         /**
-         * @param {Array<string>} param0 matrix cell coordinate
+         * @param {string[]} param0 matrix cell coordinate
          * @param {"alive" | "dead"} state
          */
         function updateMatrix([row, col], state) {
@@ -117,7 +117,7 @@ $(function () {
     })();
 
     /**
-     * @param {Array<Array<number>>} matrix
+     * @param {(0 |1)[][]} matrix
      */
     function buildTable(matrix) {
         matrixNode.children().remove();
@@ -138,12 +138,12 @@ $(function () {
     }
     /**
      *
-     * @param {Array<Array<number>>} matrix
+     * @param {(0 |1)[][]} matrix
      */
     function displayMatrix(matrix) {
         const td = Array.from($("td"));
         /**
-         * @type {Array<number>}
+         * @type {number[]}
          */
         const flatMatrix = matrix.reduce((acc, current) => {
             return acc.concat(current);
@@ -158,8 +158,8 @@ $(function () {
     /**
      * Applies the rules of the "game of life" to the matrix
      * and returns the new matrix
-     * @param {Array<Array<number>>} dataMatrix
-     * @returns {Array<Array<number>>}
+     * @param {(0 |1)[][]} dataMatrix
+     * @returns {(0 |1)[][]}
      */
     function lifeOrDeath(dataMatrix) {
         /**
