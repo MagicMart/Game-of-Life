@@ -82,7 +82,7 @@ $(function () {
         pixelCanvas.on("click", "td", function (event) {
             const target = event.target;
             if (ticking) {
-                beginClick.click();
+                beginClick.trigger("click");
             }
             const currentColor = $(target).css("background-color");
 
