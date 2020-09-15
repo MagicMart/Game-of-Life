@@ -8,9 +8,11 @@ $(function () {
     let tickSpeed = 300;
     const beginClick = $("#begin");
 
+    /**@typedef {(0 |1)[][]} Matrix */
+
     /**
-     * @param {(0 |1)[][]} matrix
-     * @returns {(0 |1)[][]} a deep copy of the matrix
+     * @param {Matrix} matrix
+     * @returns {Matrix} a deep copy of the matrix
      */
     function copyMatrix(matrix) {
         return matrix.map((row) => row.slice());
@@ -19,7 +21,7 @@ $(function () {
     const matrix = (function () {
         /**
          * @param {number} size
-         * @returns {(0 |1)[][]}
+         * @returns {Matrix}
          */
         function makeMatrix(size) {
             const row = new Array(size).fill(0);
@@ -34,7 +36,7 @@ $(function () {
         }
         /**
          *
-         * @param {(0 |1)[][]} matrix
+         * @param {Matrix} matrix
          */
         function update(matrix) {
             dataMatrix = matrix;
@@ -101,7 +103,7 @@ $(function () {
             const target = event.target;
             if (mouseDown) {
                 if (ticking) {
-                    beginClick.click();
+                    beginClick.trigger("click");
                 }
                 const currentColor = $(target).css("background-color");
                 if (currentColor === deadRGB) {
@@ -117,7 +119,7 @@ $(function () {
     })();
 
     /**
-     * @param {(0 |1)[][]} matrix
+     * @param {Matrix} matrix
      */
     function buildTable(matrix) {
         matrixNode.children().remove();
@@ -136,9 +138,9 @@ $(function () {
             )
         );
     }
+
     /**
-     *
-     * @param {(0 |1)[][]} matrix
+     * @param {Matrix} matrix
      */
     function displayMatrix(matrix) {
         const td = Array.from($("td"));
@@ -158,8 +160,8 @@ $(function () {
     /**
      * Applies the rules of the "game of life" to the matrix
      * and returns the new matrix
-     * @param {(0 |1)[][]} dataMatrix
-     * @returns {(0 |1)[][]}
+     * @param {Matrix} dataMatrix
+     * @returns {Matrix} the new matrix
      */
     function lifeOrDeath(dataMatrix) {
         /**
