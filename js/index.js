@@ -217,9 +217,10 @@ function go() {
     displayMatrix(matrix.update(lifeOrDeath(matrix.data())));
 }
 
-buildTable(matrix.data());
-
-(function () { go() })();
+(function () { 
+    buildTable(matrix.data());
+    go() 
+})();
 
 const ticker = (function () {
     let intervalID;
