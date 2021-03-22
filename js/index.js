@@ -219,8 +219,6 @@ function go() {
 
 buildTable(matrix.data());
 
-go();
-
 (function () { go() })();
 
 const ticker = (function () {
@@ -266,4 +264,3 @@ $("#myRange").on(
         }
     }
 );
-
