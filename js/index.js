@@ -130,7 +130,7 @@ $(function () {
                     "<tr>" +
                     row
                         .map(
-                            (el, j) =>
+                            (_el, j) =>
                                 `<td><span class='coord'>${i} ${j}<span></td>`
                         )
                         .join("") +
@@ -224,7 +224,10 @@ $(function () {
 
     const ticker = (function () {
         let intervalID;
-        return function ticker(startTicking) {
+        /**
+         * @param {boolean} startTicking 
+         */
+        function ticker(startTicking) {
             if (startTicking) {
                 intervalID = setInterval(function () {
                     go();
@@ -233,6 +236,7 @@ $(function () {
                 clearInterval(intervalID);
             }
         };
+        return ticker;
     })();
 
     beginClick.on("click", function () {
